@@ -1,0 +1,69 @@
+<?php $homeController = new HomeController(); ?>
+<section class="content">
+    <article class="popular">
+        <?php $popularGames = $homeController->getPopularGames() ?>
+        <table>
+            <caption>
+                <p>Les plus populaires</p>
+            </caption>
+            <tbody>
+                <?php foreach ($popularGames as $popularGame): ?>
+                    <tr>
+                        <td><img src="public/img/games/<?= $popularGame['image']?>" alt='image jeu'></td>
+                        <td>
+                            <a href="index.php?p=show&id=<?= $popularGame['gameId'] ?>" class="gamename"><?= $popularGame['name'] ?></a>
+                            <?php $popularGameGenres =  $homeController->getPostsGenre($popularGame['gameId']) ?>
+                            <p>
+                                Genre:
+                                <?php $countGenre= 0 ?>
+                                <?php foreach ($popularGameGenres as $genre): ?>
+                                    <?php if ($countGenre < count($popularGameGenres)-1): ?>
+                                        <a href="index.php?p=all&genrefilter=<?=$genre['id']?>"><?= $genre['name'] ?></a> /
+                                    <?php else: ?>
+                                        <a href="index.php?p=all&genrefilter=<?=$genre['id']?>"><?= $genre['name'] ?></a>.
+                                    <?php endif ?> 
+                                    <?php $countGenre++ ?>
+                                <?php endforeach ?>
+                            </p>
+                            <p><?= $popularGame['released_at']?></p>                              
+                            <p>Moyenne: <?= round($popularGame['moyenne'], 2)?> / 20</p>                              
+                        </td>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>   
+        </table>
+    </article>
+    <hr class='separation'>
+    <?php $lastGames = $homeController->getLastPosts(); ?>
+        <section class="recents">
+            <h2>Derniers Ajouts</h2>
+            <?php $countGames = 0 ?>
+            <?php foreach ($lastGames as $lastGame): ?>
+                <article class="recent">
+                    <img src="public/img/games/<?= $lastGame['image'] ?>" alt='image jeu'>
+                    <div>
+                        <h3><a href="index.php?p=show&id=<?= $lastGame['id'] ?>"><?= $lastGame['name'] ?></a></h3>
+                        <?php $lastGameGenres =  $homeController->getPostsGenre($lastGame['id']) ?>
+                            <p>Genre:
+                                <?php $countGenre= 0 ?>
+                                <?php foreach ($lastGameGenres as $genre): ?>
+                                    <?php if ($countGenre < count($lastGameGenres)-1): ?>
+                                        <a href="index.php?p=all&genrefilter=<?=$genre['id']?>"> <?= $genre['name'] ?></a>,
+                                    <?php else: ?>
+                                        <a href="index.php?p=all&genrefilter=<?=$genre['id']?>"> <?= $genre['name'] ?></a>.
+                                    <?php endif ?> 
+                                    <?php $countGenre++ ?>
+                                <?php endforeach ?>
+                            </p>
+                        <?php $date = date_create($lastGame['created_at']); ?>
+                        <?php $creationDate = date_format($date, "d-m-Y"); ?>
+                        <p>Ajouté le: <?= $creationDate ?></p>
+                    </div>
+                </article>
+                <?php if ($countGames < count($lastGames) - 1):?>
+                    <hr>
+                <?php endif ?>
+                    <?php $countGames++ ?>
+                <?php endforeach ?>
+        </section>
+</section>

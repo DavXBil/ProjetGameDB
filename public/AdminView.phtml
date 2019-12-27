@@ -1,0 +1,126 @@
+<!-- Si l'utilisateur n'est pas authentifié ou n'est pas admin redirection vers la page d'accueil -->
+<?php if((!$session->checkAuthentication()) || (!$session->isAdmin())): ?>
+    <?php header('Location: index.php') ?>
+<?php endif ?>
+
+<?php $adminController = new AdminController() ?>
+<!-- Lancement de la fonction d'ajout d'un élement (plateforme/genre/dev//editeur)-->
+<?php if(!empty($_POST)): ?>
+    <?php $adminController->addElement() ?>
+<?php endif ?>
+<!-- Récupération de la page actuelle ou de la page par défaut -->
+<?php if(!empty($_GET['page'])) : ?>
+    <?php $page = $_GET['page'] ?>
+<?php else : ?>
+     <?php $page = 1 ?>
+<?php endif ?>
+<!-- Récupération de la liste actuelle ou la liste par defaut -->
+<?php if(!empty($_GET['list'])) : ?>
+    <?php $list = $_GET['list'] ?>
+<?php else : ?>
+     <?php $list = "game" ?>
+<?php endif ?>
+
+<?php switch ($list) {
+
+        case 'game':
+            $adminLists = $adminController->showgames($page);
+            break;
+        
+        case 'dev':
+            $adminLists = $adminController->showDevs($page);
+        break;
+        
+        case 'editor':
+            $adminLists = $adminController->showEditors($page);
+        break;
+        
+        case 'genre':
+            $adminLists = $adminController->showGenres($page);
+        break;
+        
+        case 'platform':
+            $adminLists = $adminController->showPlatforms($page);
+        break;
+    } 
+?>
+
+<!-- Lancement de la fonction de determination du nombre de pages -->
+<?php  $nbPage = $adminController->getPageNumbers() ?>
+
+<!-- Lancement de la fonction de suppression d'élément -->
+<?php if (isset($_GET['action']) && ($_GET['action'] == 'delgame')): ?>
+    <?php $adminController->removeElement($_GET['id'], $_GET['list']) ?>
+<?php endif ?>
+
+<section id="adminlist">
+    <ul class="list">
+        <li>
+            <a href="index.php?p=admin&list=game"
+                <?php if ($list == "game"): ?>
+                    class="currentpage"
+                <?php endif ?>>
+                Gestion des Jeux
+            </a>
+        </li>
+        <li>
+            <a href="index.php?p=admin&list=dev"
+                <?php if ($list == "dev"): ?>
+                    class="currentpage"
+                <?php endif ?>>
+            Gestion des Developpeurs
+            </a>
+        </li>
+        <li>
+            <a href="index.php?p=admin&list=editor"
+                <?php if ($list == "editor"): ?>
+                    class="currentpage"
+                <?php endif ?>>    
+            Gestion des Editeurs
+            </a>
+        </li>
+        <li>
+            <a href="index.php?p=admin&list=genre"
+                <?php if ($list == "genre"): ?>
+                    class="currentpage"
+                <?php endif ?>>    
+            Gestion des Genres
+            </a>
+        </li>
+        <li>
+            <a href="index.php?p=admin&list=platform"
+                <?php if ($list == "platform"): ?>
+                    class="currentpage"
+                <?php endif ?>>    
+            Gestion des Plateformes
+            </a>
+        </li>
+    </ul>
+</section>
+<!-- Affichage du message confirmation de succès d'une opération -->
+<?php if (isset($_GET['status']) && $_GET['status'] === "success"): ?>
+    <p class='confirmmsg'>Opération effectuée avec succès</p>
+<?php endif ?> 
+<section id="admintable">
+    <?php include 'Admin'.$list.'ListView.phtml' ?>
+</section>
+
+<section class="paging">
+    <nav>
+        <?php if ($page > 1): ?>
+            <a href="index.php?p=admin&page=<?= $page -1 ?>&list=<?= $list ?>">Précedent</a>
+        <?php endif ?>     
+
+        <?php for ($i = 1; $i <= $nbPage; $i++) : ?>
+            <?php if ($i == $page) : ?>
+                <a href="index.php?p=admin&page=<?= $i ?>&list=<?= $list ?>" class="currentpage"><?= $i ?></a>
+            <?php else : ?>
+                <a href="index.php?p=admin&page=<?= $i ?>&list=<?= $list ?>"><?= $i ?></a>
+            <?php endif ?>
+        <?php endfor ?>
+
+        <?php if ($page < $nbPage): ?>
+            <a href="index.php?p=admin&page=<?= $page +1 ?>&list=<?= $list ?>">Suivant</a>
+        <?php endif ?>
+    </nav>
+</section>

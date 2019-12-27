@@ -1,0 +1,23 @@
+Informations de base de données:
+
+DatabaseModel.php: ligne 5 à 10
+
+
+Informations de connexion utilisateurs: (Sensible à la casse)
+
+Admin:
+pseudo: Brain
+mot-de-passe: feri626468
+
+
+Utilisateur lambda:
+
+pseudo: Jean-Pikachu
+mot-de-passe: pikapi1234
+
+pseudo: Blob
+mot-de-passe: bleh2428
+
+
+
+

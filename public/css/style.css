@@ -1,0 +1,973 @@
+/*--------------------------------------------------------------GENERAL--------------------------------------------------------*/
+
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+.xdebug-error {
+    color: black;
+}
+
+body {
+    color: rgb(243, 131, 32);
+    font-family: 'Play', Arial, sans-serif;
+    background-image: url(../img/back.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    font-size: 1.9rem;
+}
+
+header, footer{
+    margin: 0 -10px;
+    padding: 30px 25px 0;
+    background-color: rgb(39, 39, 39);
+    text-align: center;
+}
+
+main {
+    background: linear-gradient(rgba(75, 75, 75, 0.9), rgba(59, 59, 59, 0.9) );
+    padding-bottom: 20px;
+    margin-right: -10px;
+}
+
+main h2 {
+    font-size: 3.5rem;
+}
+
+a {
+    color: rgb(75, 194, 224);
+    font-family: 'Titillium Web', Arial, sans-serif;
+    transition: all 0.5s ease;
+    padding: 10px 0;
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(255, 72, 0);
+    transition: all 0.5s ease;
+}
+
+img {
+    max-width: 100%;
+}
+
+ul {
+    list-style-type: none;
+}
+
+button {
+    background-color: rgb(59, 59, 59);
+    color: rgb(243, 131, 32);
+    border: 1px solid rgb(243, 131, 32);
+    padding:  5px 20px;
+    transition: all 0.5s ease;
+}  
+
+button:hover {
+    cursor: pointer;
+    color: rgb(39, 39, 39);
+    background-color: rgb(243, 131, 32);
+    border: 1px solid rgb(39, 39, 39);
+    transition: all 0.5s ease;
+}
+
+button:active {
+   background-color: rgb(255, 72, 0);
+   transition: none;
+
+}
+
+.moreinput, .lessinput {
+    font-size: 2.6rem;
+    padding: 10px;
+    outline: 1px solid rgb(243, 131, 32);
+    margin: 10px;
+    transition: all 0.5s ease;
+}
+
+.moreinput:hover, .lessinput:hover {
+    color: rgb(250, 249, 249);
+    background-color: rgb(243, 131, 32);
+    outline: 1px solid rgb(75, 194, 224);
+    transition: all 0.5s ease;
+}
+
+.moreinput:active, .lessinput:active {
+    color: rgb(255, 75, 30);
+}
+
+.disabled {
+    color: rgb(87, 87, 87);
+    text-shadow: -1px 0 rgb(190, 100, 58), 0 1px rgb(190, 100, 58), 1px 0 rgb(190, 100, 58), 0 -1px rgb(190, 100, 58);
+}
+
+.recent img, .showgame img, .popular img, #allgametable td:first-child img {
+    border-radius: 10%;
+}
+
+#usernfo img, .showreview img {
+    border: 5px solid rgb(190, 100, 58);
+    border-radius: 15%;
+}
+
+/*--------------------------------------------------------HEADER------------------------------------------------------------*/
+
+h1, h2, h3, h4, caption, .gamename {
+   text-transform: capitalize;
+}
+
+header h1 {
+    font-size: 3.5rem;
+}
+
+header h1 .fa-gamepad {
+    display: block;
+    font-size: 6rem;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-around;
+    transition: all 0.5s ease;
+}
+
+header nav a {
+    font-size: 2.5rem;
+    font-weight: bold;
+    flex-basis: 35%;
+}
+
+header nav a:hover {
+    transition: all 0.5s ease;
+    background-color: rgb(52, 115, 131);
+}
+
+/*--------------------------------------------------------MAIN------------------------------------------------------------*/
+
+label {
+    font-size: 2rem;
+}
+
+table {
+   background-color: rgba(59, 59, 59, 1)
+}
+
+.forms {
+
+    background: linear-gradient( rgba(59, 59, 59, 1), rgba(75, 75, 75, 0.2));
+}
+
+#filter, #adminlist {
+    background: linear-gradient(rgba(75, 75, 75, 0.2), rgba(75, 75, 75, 0.1));
+}
+
+.forms {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px 0;
+    margin-bottom: 50px;    
+}
+
+.forms #usernfo {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.forms button {
+    margin-top: 6px;
+}
+
+.forms .loginform input {
+    display: block;
+}
+
+.forms .search input {
+    margin-top: 5px;
+    display: block;
+}
+
+.error {
+    background-color: #fba;
+}
+
+.errormsg {
+    color: #fba;
+}
+
+.hidden {
+    display:none;
+}
+
+#loginmsg {
+    display: inline;
+    flex-basis: 76%;
+}
+
+#usernfo div {
+    display: inline-block;
+    width: 30%;
+    vertical-align: top;
+}
+
+#usernfo img {
+    object-fit: fill;
+    width: 270px;
+    height: 90px;
+}
+
+#usernfo div:last-child {
+    width: 40%;
+    margin-left: 10px;
+}
+
+#usernfo a {
+    padding: 0;
+    padding-top: 5px;
+    display: block;
+}
+
+#usernfo div p {
+    margin: 0;
+    font-size: 2.2rem;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table caption, th {
+    font-size: 1.7rem;
+    color: black;
+    background-color: rgb(243, 131, 32);
+    border-radius:  30px 30px 0 0;
+}
+
+table td, table th {
+    border: 1px solid black;
+    border-top: none;
+    border-radius: 0;
+}
+
+table td a {
+    padding: 0;
+}
+
+td:nth-child(2) {
+    border-left-style: none;
+}
+
+.content {
+    padding-bottom: 50px;
+}
+
+.content h2{
+    text-decoration: underline;
+}
+
+.popular {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.popular caption {
+    font-size: 2.5rem;
+    font-weight: bold
+}
+
+.popular td:first-child {
+    border-right-style: none;
+    width: 46%;
+}
+
+.popular img {
+    width: 70%;
+    height: 160px;
+}
+
+.popular td:nth-child(2) {
+    padding: 20px 20px;
+    font-size: 2.2rem;
+}
+
+.popular .gamename {
+    font-size: 2.4rem;
+    font-weight: bold;
+}
+
+.separation {
+    margin: 50px auto;
+    width: 90%
+}
+
+.recents, .showgame, .add, .showuser, .edituser {
+    text-align: center;
+    background-color: rgba(59, 59, 59, 1);
+    border-radius: 60px;
+    padding: 20px;
+    width: 90%;
+    margin: auto;
+}
+
+.recent h3 a, .recent div p a {
+    padding: 0;
+}
+
+.recent img, .popular img {
+    width: 50%;
+}
+
+.recents {
+    font-size: 2rem;
+    margin-top: 20px;
+}
+
+.recent {
+    margin: 30px 0;
+    padding: 30px 0;
+}
+
+.recent div {
+    margin: auto;
+}
+
+.paging {
+    font-size: 2.5rem; 
+    width: 30%;
+    margin: auto;
+    padding: 0 0 30px;
+    text-align: center;
+ }
+
+ .paging a {
+    margin: 0 5px;
+ }
+ 
+ .currentpage {
+    text-decoration: underline;
+    text-decoration-color: rgb(190, 100, 58); 
+ }
+
+ .imgpreview {
+     width: 130px;
+     display: block;
+     margin: 10px auto;
+ }
+
+/*-------SHOWGAME-------*/
+
+.showgame {
+    width: 95%;
+    margin: auto ;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.showgame img {
+    width: 50%;
+    padding: 20px 0;
+    margin-left: 20px;
+}
+
+.showgame .gamedetails h2 {
+    font-size: 3rem;
+    text-decoration: underline;
+}
+
+.showgame ul {
+    margin-top: 40px;
+    text-align: left;
+}
+
+.gamedetails li {
+    margin: 15px 0;
+}
+
+.showgame .description h3 {
+    font-size: 2.8rem;
+    text-align: left;
+    text-decoration: underline;
+    text-align: center;
+    margin: 20px 30px;
+}
+
+.showgame .description p {
+    margin: 20px 30px 30px;
+    text-align: justify;
+}
+
+.showgame hr {
+    width: 90%;
+}
+
+.review {
+    width: 70%;
+    margin-bottom: 10px; 
+}
+
+.review label, .review button {
+    display: block;
+    margin: 5px 0;
+}
+
+.review #vote textarea {
+    resize: none;
+    width: 70%;
+}
+
+.review #vote button {
+    margin: 10px auto 0;
+}
+
+.allreviews {
+    width: 100%;
+}
+
+.allreviews h3 {
+    font-size: 3rem;
+    text-decoration: underline;
+}
+
+.showreview {
+    text-align: left;
+    margin-left: 1%;
+    display: flex;
+    flex-direction: row;
+    margin: 25px 10px;
+}
+
+.showreview .note {
+    display: block;
+    margin-right: 20px;
+    padding-top: 50px;
+    padding-right: 20px;
+    border-right: 2px solid;
+    font-size: 4rem;
+}
+
+.showreview div:nth-child(2) {
+    width: 90%;
+}
+
+.showreview img {
+    padding: 0;
+    width: 80px;
+    height: 75px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+}
+
+.showreview h4 {
+    display: inline-block;
+}
+
+.allreviews hr {
+    width: 60%;
+}
+
+.prevnext {
+    width: 80%;
+    text-align: center;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.prevnext a {
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: underline;
+    margin: auto;
+}
+
+
+/*------------------ADDGAME--------------*/
+
+.add #addgame input, .add #addgame select, .add #addgame textarea {
+    margin: auto;
+    width: 90%;
+}
+
+.add {
+    margin-bottom: 50px;
+}
+
+.add form {
+    margin: 0 25px 25px 0;
+}
+
+.addmsg {
+    text-align: center;
+    font-size: 3rem;
+    color: rgb(247, 56, 49);
+}
+
+.add h2 {
+    text-decoration: underline;
+}
+
+.add li {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.add label {
+    margin: auto;
+    margin-bottom: 5px;
+    display: block;
+    font-size: 2.3rem;
+}
+
+.add textarea {
+    width: 70%;
+    resize: none;
+}
+
+
+/*-------------------------ADMIN-----------------------*/
+
+#adminlist, .addelement {
+    font-size: 2rem;
+}
+
+.addelement label, .addelement input {
+    display: block;
+    margin: 5px auto 10px;
+}
+
+#adminlist {
+    padding: 60px;
+    margin-top: -50px;
+}
+
+#adminlist .list {
+    padding-inline-start: 0;
+    text-align: center;
+    margin: auto;
+}
+
+#adminlist .list li {
+    font-size: 2.5rem;
+}
+
+#adminlist a{
+    margin: 20px 0;
+    padding: 0;
+    list-style-type: disc;
+}
+
+.confirmmsg {
+    text-align: center;
+}
+
+#admintable{
+    padding: 20px 0;
+    width: 90%;
+    margin: auto;
+}
+
+#admintable h3 {
+    text-align: center;
+}
+
+#admingame, #admindev, #admineditor, #admingenre { 
+    margin: auto;
+    text-align: center;
+}
+
+#admingame th{
+    padding: 5px;
+    font-size: 1.9rem;
+}
+
+#admingame td {
+    border: 1px solid black;
+    padding: 0 10px;
+}
+
+#admingame a {
+    padding: 0;
+    margin: 0;
+}
+
+.addgame {
+    margin-left: 20px;
+}
+
+.addgame a {
+    font-size: 2.3rem;
+}
+
+.addelement label {
+    text-align: center;
+}
+
+.addelement button {
+    display: block;
+    margin: 5px auto 10px;
+}
+
+/*-------------------------ALLGAME-----------------------*/
+
+#filter form select, #filter form input, #filter form label, #filter button {
+    display: block;
+    text-align: center;
+    margin: 8px auto;
+}
+
+#filter {
+    margin-top: -50px;
+    padding: 5px 0;
+}
+
+#filter h3 {
+    font-size: 3rem;
+    text-align: center;
+}
+
+#filter form label {
+    width: 20%;
+}
+
+#filter .reset {
+    width: 17%;
+    margin: 20px auto;
+    padding: 0;
+    font-size: 2.3rem;
+    display: block; 
+    text-align: center;
+}
+
+.letterfilter {
+    font-size: 2.6rem;
+    width: 95%;
+    margin: auto;
+}
+
+.letterfilter ul {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0;
+}
+
+.letterfilter li {
+    vertical-align: middle;
+}
+
+.letterfilter a {
+    padding: 0;
+}
+
+#allgametable {
+    margin: 0 auto 50px;
+    text-align: center;
+    width: 90%;
+}
+
+#allgametable td:nth-child(4), #allgametable th:nth-child(4) {
+    display: none;
+}
+
+#allgametable td:first-child a {
+    display: block;
+    margin: 10px 0;
+}
+
+#allgametable td:first-child img {
+    width: 100px;
+    display: none;
+    display: block;
+    margin: 10px auto;
+}
+
+#allgametable td a {
+    margin: 0;
+    padding: 0;
+}
+
+/*----------------------REGISTER------------------------*/
+
+.register {
+    padding: 104px 0;
+}
+
+.register form {
+    margin: 35px;
+    padding-right: 35px; 
+}
+
+#userimage {
+    width: 45%;
+}
+
+/*-----------------------SHOWUSER-----------------------*/
+
+.showuser {
+    padding: 60px 0;
+    margin-bottom: 30px;
+}
+
+.userdetails {
+    padding: 20px;
+}
+
+.userdetails img {
+    width: 20%;
+    border: 6px solid rgb(190, 100, 58);
+    border-radius: 25%;
+}
+
+.userdetails ul {
+    padding: 0;
+}
+
+
+/*-------------------EDITUSER---------------------------*/
+
+.edituser {
+    padding: 60px 0;
+}
+
+.edituser li {
+    margin: 15px 0;
+}
+
+/*-----------------------FOOTER-------------------------*/
+
+footer {
+    padding: 50px;  
+}
+
+footer nav {
+    display: flex;
+    justify-content: space-around;
+    font-size: 2.2rem; 
+}
+
+/*--------------------------------------------------TABLET-----------------------------------------------------*/
+
+@media screen and (min-width:768px) {
+
+    main {
+        width: 90%;
+        margin: auto;
+    }
+
+    .add #addgame input, .add #addgame select{
+        width: 40%;
+    }
+
+    .forms #usernfo {
+        text-align: left;
+    }
+
+    .popular {
+        flex-basis: 50%;
+    }
+
+    .popular td:nth-child(2) p {
+        margin-right: 5px;
+    }
+
+    .popular img {
+        width: 45%;
+    }    
+
+    .recent img {
+        width: 40%;
+    }
+
+    #adminlist .list {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    #filter form select, #filter form input, #filter form label, #filter button {
+        display: inline;
+        text-align: center;
+        margin: 8px auto;
+    }
+
+    #filter form {
+        text-align: center;
+    }
+
+    #allgametable td:nth-child(4), #allgametable th:nth-child(4) {
+        display: table-cell;
+    }
+
+    #allgametable img {
+        display: initial;
+    }
+
+    .userdetails img {
+        width: 15%;
+    }
+}
+
+/*-----------------------------------------------DESKTOP-------------------------------------------------------*/
+
+@media screen and (min-width:1025px) {
+
+    .add #addgame input, .add #addgame select{
+        width: 25%;
+    }
+
+    .add #addgame label {
+        width: 12%;
+    }
+
+    .add #addgame #picture {
+        width: 23%;
+    }
+
+    .add #addgame textarea {
+        width: 50%;
+    }
+
+    #loginmsg {
+        flex-basis: 80%;
+    }
+    
+    .forms .loginform input {
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    .forms .search input {
+        display: inline-block;
+    }
+
+    #filter form select, #filter form label, #filter button {
+        display: inline-block;
+    }
+    
+    #filter form label {
+       display: inline;
+    }
+
+    #filter form select {
+        margin-right: 20px;
+    }
+
+    #filter form button {
+        display: block;
+        width: 10%;
+    }
+
+    .letterfilter {
+        width: 90%;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .popular {
+        flex-basis: 33%;
+        margin: 30px 20px 0;
+    }
+
+    .popular img {
+        width: 55%;
+    }
+
+    .separation {
+        display: none
+    }
+
+    .recents {
+        display: block;
+        margin-right: 20px;
+        flex-basis: 45%;
+        margin-right: 20px;
+        margin: 30px 0  0 60px;
+    }
+
+    .recents img {
+        width: 35%;
+        margin-left: 0;
+    }
+
+    .register {
+        font-size: 2rem;
+    }
+
+    .userdetails img {
+        width: 10%;
+    }
+
+    #admingame { 
+        width: 70%;
+        text-align: center;
+    }
+
+    #admindev, #admineditor, #admingenre {
+        width: 40%;
+    }
+
+    .addgame {
+        align-self: flex-start;
+        margin-left: 15%;
+    }
+
+    #adddev {
+        margin: auto;
+    }
+
+    #allgametable a{
+        font-size: 2rem;
+    }
+
+    #allgametable td:first-child {
+        display: block;
+    }
+
+    #allgametable td:first-child img {
+        width: 100px;
+    }
+    
+    #allgametable td:first-child a {
+        font-size: 2.7rem;
+    }
+
+    .showgame img {
+        width: 20%;
+        margin-bottom: 20px;
+    }
+
+    .showgame .description {
+        width: 85%;
+    }
+
+    .showgame .description h3 {
+        text-align: left;
+    }
+
+    .showreview img {
+        width: 80px;
+        height: 75px;
+    }
+
+    .review #vote textarea {
+        width: 50%;
+    }
+
+    .add #userimage {
+        width: 25%;
+    }
+}

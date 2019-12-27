@@ -1,0 +1,21 @@
+<p class="addelement addgame"><a href="index.php?p=add">Ajouter un Jeu <i class="fas fa-plus"></i></a></p>
+<table id="admingame">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Ajouté le:</th>
+            <th>Ajouté par:</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($adminLists as $adminList): ?>
+            <tr>
+                <td><a href="index.php?p=show&id=<?= $adminList['id'] ?>" class="gamename"><?= $adminList['name'] ?></a></td>
+                <td><?= $adminList['created_at'] ?></td>
+                <td href="index.php?p=user&id=<?= $adminList['user_id'] ?>"><?= $adminList['username'] ?></td>
+                <td><a href="index.php?p=editg&id= <?= $adminList['id'] ?>"><i class="fa fa-edit"></i></a></td>
+                <td><a href="index.php?p=admin&action=delgame&id=<?=$adminList['id'] ?>&list=game"><i class="fas fa-times"></i></a></td>
+            </tr>
+        <?php endforeach ?>
+    </tbody>
+</table>

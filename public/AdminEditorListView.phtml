@@ -1,0 +1,24 @@
+<form action="index.php?p=admin&list=editor" name="addelement" class="addelement" method="POST" enctype="multipart/form-data">
+    <h3>Ajouter un éditeur:</h3>
+    <label for="addeditor">Nom</label>
+    <input type="text" name="addeditor">
+    <button type="submit">Ajouter</button>
+</form>
+
+
+
+<table id="admineditor">
+    <thead>
+        <tr>
+            <th>Nom</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($adminLists as $adminList): ?>
+            <tr>
+                <td><a href="index.php?p=all&editorfilter=<?= $adminList['id'] ?>"><?= $adminList['name'] ?></a></td>
+                <td><a href="index.php?p=admin&action=delgame&id=<?=$adminList['id'] ?>&list=editor"><i class="fas fa-times"></i></a></td>
+            </tr>
+        <?php endforeach ?>
+    </tbody>
+</table>

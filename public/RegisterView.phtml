@@ -1,0 +1,40 @@
+
+<?php $registerController = new RegisterController() ?>
+
+<!--Si les champs ont été envoyés, appel de la methode d'enregistrement -->
+<?php if (isset($_POST['username']) && isset($_POST['mail']) && isset($_POST['password']) && isset($_POST['pswrdconfirm'])): ?>
+    <?= $registerController->register() ?>
+<?php endif ?>
+
+<section class="add register">
+    <h2>Inscription:</h2>
+    <form name="register" id="register" method="POST" enctype="multipart/form-data">
+    <ul>
+        <li>
+            <label for="username">Pseudo:</label>
+            <input type="text" name="username" id="username" onblur="checkForm(this)">
+        </li>   
+        <li>
+            <label for="mail">Addresse e-mail:</label>
+            <p class="hidden errormsg errormail">Cette addresse e-mail est invalide</p>
+            <input type="text" name="mail" id="mail" onblur="checkForm(this)">
+        </li>    
+        <li>
+            <label for="password">Mot-de-Passe:</label>
+            <input type="password" name="password" id="password" onblur="checkForm(this)">
+        </li>
+        <li>
+            <label for="pswrdconfirm">Confirmation du Mot-de-Passe:</label>
+            <p class="hidden errormsg errorpswrd">Les mots de passe ne sont pas identiques</p>
+            <input type="password" name="pswrdconfirm" id="pswrdconfirm" onblur="checkForm(this)">
+        </li> 
+        <li>
+            <label for="userimage">Images Utilisateur:</label>
+            <img src="public/img/users/defaultimg.jpg" class='imgpreview'>
+            <input type="file" name="userimage" id="userimage" accept="image/*" onchange="imagePreview(event)">
+        </li>  
+        <button type="submit" id="regbtn">Enregistrer</button>
+        <button type="reset">Annuler</button> 
+    </ul>  
+    </form>
+</section> 

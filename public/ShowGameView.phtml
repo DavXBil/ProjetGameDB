@@ -1,0 +1,127 @@
+<?php $game = new ShowGameController() ?>
+
+<?php $gameNfo = $game->getGame()?>
+<!-- Si le jeu à été effacé on redirige -->
+<?php if(!$gameNfo): ?>
+   <?php $game->redirect() ?>
+<?php endif ?>
+
+
+<?php if(isset($_POST['note']) && isset($_POST['comment'])): ?>
+    <!-- Lancement de la fonction d'ajout d'évaluation -->
+    <?php $reviewResponse = $game->review() ?>
+    <!-- affichage de message résultat -->
+    <?= '<script>alert("'.$reviewResponse.'")</script>' ?>
+<?php endif ?>
+
+<section class="showgame">
+    <img src='public/img/games/<?= $gameNfo['image'] ?>' alt="image jeu">
+    <article class="gamedetails">
+        <h2><?= $gameNfo['name'] ?></h2>
+        <ul>
+            <li>- Developpé par: <a href='index.php?p=all&devfilter=<?= $gameNfo['dev_id'] ?>'><?= $gameNfo['devName'] ?></a>.</li>
+            <li>- Edité par: <a href='index.php?p=all&editorfilter=<?= $gameNfo['editor_id'] ?>'><?= $gameNfo['editorName'] ?></a>.</li>
+            <li>- Sorti en: <?= $gameNfo['released_at'] ?>.</li>
+            <li>- Platformes:  
+                <?php $platforms = $game->getGamePlatforms($gameNfo['id']) ?>
+                <?php $countPlatform = 0 ?>
+                <?php foreach ($platforms as $platform): ?>
+                    <?php if ($countPlatform < count($platforms)-1): ?>
+                        <a href="index.php?p=all&platformfilter=<?= $platform['id'] ?>"> <?= $platform['name'] ?></a>,
+                    <?php else: ?>
+                        <a href="index.php?p=all&platformfilter=<?= $platform['id'] ?>"> <?= $platform['name'] ?></a>.
+                    <?php endif ?> 
+                    <?php $countPlatform++ ?>                        
+                <?php endforeach ?>
+            </li>
+            <li>-Genre : 
+                <?php $genres = $game->getGameGenre($gameNfo['id']) ?>
+                <?php $countGenre= 0 ?>
+                <?php foreach ($genres as $genre): ?>
+                    <?php if ($countGenre < count($genres)-1): ?>
+                        <a href="index.php?p=all&genrefilter=<?= $genre['id'] ?>"> <?= $genre['name'] ?></a>,
+                    <?php else: ?>
+                        <a href="index.php?p=all&genrefilter=<?= $genre['id'] ?>"> <?= $genre['name'] ?></a>.
+                    <?php endif ?> 
+                    <?php $countGenre++ ?>  
+                <?php endforeach ?>
+            </li>
+        </ul>
+    </article>
+    <article class='description'>
+        <h3>Description:</h3>
+        <p><?= nl2br($gameNfo['description']) ?></p>
+    </article>
+
+    <nav class="prevnext">
+        <?php if ($gameNfo['id'] != 1): ?>
+            <a href="index.php?p=show&side=prev&id=<?= $gameNfo['id'] - 1 ?>">Precédent</a>
+        <?php endif ?>
+        <?php $lastId = $game->getLastId() ?>
+        <?php if ($gameNfo['id'] != $lastId): ?>
+            <a href="index.php?p=show&side=next&id=<?= $gameNfo['id'] + 1 ?>">Suivant</a>
+        <?php endif ?>
+    </nav>
+    
+    <hr>
+    <!-- Récuperation des reviews lié au jeu -->
+    <?php $reviews = $game->getReviews($gameNfo['id']) ?>
+
+    <?php $evaluated = false ?>
+    <!-- Test si l'utilisateur authentifié à déjà évalué le jeu -->
+    <?php if ($isAuthenticated):?>
+        <?php for ($i=0; $i < count($reviews); $i++) : ?> 
+            <?php if (in_array($session->showName(), $reviews[$i])): ?>
+                <?php $evaluated = true ?>
+            <?php endif ?>
+        <?php endfor ?>
+    <?php endif ?>
+    <article class=review>
+        <h3>Evaluer le jeu:</h3>
+        <?php if(!$isAuthenticated): ?>
+                <p>Vous devez être authentifié pour evaluer un jeu</p>
+        <?php elseif($evaluated === true) : ?>
+                <p>Vous avez déjà évalué ce jeu</p>
+        <?php else :?>
+            <form name="vote" id="vote" method="POST" enctype="multipart/form-data">
+                <label for="note">Note:</label>
+                <select name="note">
+                    <option value="#">--Note--</option>
+                    <?php foreach (range('0','20') as $i): ?>
+                        <option value="<?= $i ?>"><?= $i ?></option>
+                    <?php endforeach ?>
+                </select>
+                <label for="comment">Rédiger un avis:</label>
+                <textarea rows="15" name="comment"></textarea>
+                <button>Envoyer</button>
+            </form>
+        <?php endif ?>
+    </article>
+    <hr>
+    <?php $reviewCount = 1 ?>
+    <section class=allreviews>
+        <h3>Avis des membres:</h3>
+        <?php if(empty($reviews)): ?>
+            <p>il n'y a pas encore d'évaluations pour ce jeu</p>
+        <?php else: ?>
+            <?php foreach ($reviews as $review): ?>
+                <article class="showreview">
+                    <div class="note"><?=$review['note'] ?>/20</div>
+                    <div>
+                        <img  src='public/img/users/<?= $review['image'] ?>' alt="userimage">
+                        <h4><?= $review['username'] ?></h4>
+                       <?php if (strlen($review['comment']) >= 200): ?>
+                            <p id="insight<?=$reviewCount?>" class="insight"><?= nl2br(substr($review['comment'], 0, 200))?>...</p>
+                            <p id="fullreview<?=$reviewCount?>" class="fullreview hidden"><?= nl2br($review['comment'])?></p>
+                            <a href="#" id="<?=$reviewCount?>" class="readmore">Voir plus</a>
+                        <?php else: ?>
+                            <p><?= $review['comment'] ?></p>
+                        <?php endif ?>
+                    </div>
+                </article>
+                <hr>
+                <?php $reviewCount++ ?>
+            <?php endforeach ?>
+        <?php endif ?>        
+    </section>
+</section>

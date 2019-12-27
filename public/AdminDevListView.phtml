@@ -1,0 +1,22 @@
+<form action="index.php?p=admin&list=dev" name="addelement" class="addelement" id="adddev" method="POST" enctype="multipart/form-data">
+    <h3>Ajouter un developpeur:</h3>
+    <label for="adddev">Nom</label>
+    <input type="text" name="adddev">
+    <button type="submit">Ajouter</button>
+</form>
+
+<table id="admindev">
+    <thead>
+        <tr>
+            <th>Nom</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($adminLists as $adminList): ?>
+            <tr>
+                <td><a href="index.php?p=all&devfilter=<?= $adminList['id'] ?>"><?= $adminList['name'] ?></a></td>
+                <td><a href="index.php?p=admin&action=delgame&id=<?=$adminList['id'] ?>&list=dev"><i class="fas fa-times"></i></a></td>
+            </tr>
+        <?php endforeach ?>
+    </tbody>
+</table>

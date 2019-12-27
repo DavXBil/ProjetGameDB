@@ -1,0 +1,47 @@
+<!-- Si l'utilisateur n'est pas identifié redirection vers la page d'accueil -->
+<?php if(!$session->checkAuthentication()): ?>
+    <?php header('Location: index.php') ?>
+<?php endif ?>
+
+<?php $editUserController = new EditUserController() ?>
+<!-- Récupération des utilisateurs -->
+<?php $toEditUser = $editUserController->getUser() ?>
+<!-- Si le formulaire d'edition a été envoyé on lance la méthode d'édition -->
+<?php if (!empty($_POST)): ?>
+    <?php $editUserController->editUser() ?>
+<?php endif ?>
+
+<section class="edituser">
+    <h2>Modification des Informations</h2>
+    <form name="editu" id="editu" method="POST" enctype="multipart/form-data">
+        <ul>
+            <li>
+                <label for="username">Pseudo:</label>
+                <input type="text" name="username" id="username" value="<?= $toEditUser['username'] ?>" onblur="checkForm(this)">
+            </li>   
+            <li>
+                <label for="mail">Addresse e-mail:</label>
+                <p class="hidden errormsg errormail">Cette addresse e-mail est invalide</p>
+                <input type="text" name="mail" id="mail" value="<?= $toEditUser['mail'] ?>" onblur="checkForm(this)">
+            </li>    
+            <li>
+                <label for="oldpassword">Ancien mot-de-Passe:</label>
+                <input type="password" name="oldpassword" id="oldpassword" onblur="checkForm(this)">
+            </li>
+            <li>
+                <label for="password">Nouveau mot-de-Passe:</label>
+                <input type="password" name="password" id="password" onblur="checkForm(this)">
+            </li>
+            <li>
+                <label for="pswrdconfirm">Confirmation du Mot-de-Passe:</label>
+                <p class="hidden errormsg errorpswrd">Les mots de passe ne sont pas identiques</p>
+                <input type="password" name="pswrdconfirm" id="pswrdconfirm" onblur="checkForm(this)">
+            </li> 
+            <li>
+                <label for="userimage">Image utilisateur</label>
+                <input type="file" name="userimage"  id="userimage">
+            </li>  
+            <button type="submit" id="regbtn">Enregistrer</button>
+        </ul>  
+    </form>
+</section> 

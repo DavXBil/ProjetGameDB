@@ -1,0 +1,179 @@
+<?php $allGameController = new AllGameController() ?> 
+<!-- Détermination de la page actuelle -->
+<?php if(!empty($_GET['page'])) : ?>
+    <?php $page = $_GET['page'] ?>
+<?php else : ?>
+     <?php $page = 1 ?>
+<?php endif ?>
+
+    <!-- ------Verification des filtre de recherche------  -->
+    <!-- filtre du champs de recherche -->
+    <?php $wordFilter ??= $_POST['search'] ?? $_GET['search'] ?? "" ?>
+    <!-- filtre de genre -->
+    <?php $genreFilter ??= $_POST['genrefilter'] ?? $_GET['genrefilter'] ?? "" ?>
+    <!-- filtre de plateforme -->
+    <?php $platformFilter ??= $_POST['platformfilter'] ?? $_GET['platformfilter'] ?? 0?>
+    <!-- filtre de dev -->
+    <?php $devFilter ??= $_POST['devfilter'] ?? $_GET['devfilter'] ?? 0 ?>
+    <!-- filtre de dev -->
+    <?php $editorFilter ??= $_POST['editorfilter'] ?? $_GET['editorfilter'] ?? 0 ?>
+    <!-- ordre de tri -->
+    <?php $orderFilter ??= $_POST['orderfilter'] ?? $_GET['orderfilter'] ?? "alphabeticalasc" ?>
+    <!-- filtre de tri par lettre -->
+    <?php $letterFilter ??= $_GET['letterfilter'] ?? "" ?>
+
+<!-- récupération des jeux selon les filtres -->
+<?php $games = array_unique($allGameController->getGames($page), SORT_REGULAR) ?>
+<?php $toPassList = $games ?>
+<!-- récupération du nombre de pages pour la pagination -->
+<?php  $nbPage = $allGameController->getPageNumbers() ?>
+
+<section id="filter">
+    <h3>Filtres de recherche:</h3>
+    <form name="filterform" action='index.php?p=all' id="filterform" method="POST" >
+        <div>
+            <label for="search">Titre d'un jeu:</label>
+            <input type="text" name="search">
+        </div>
+        <?php $genres = $allGameController->getGenres() ?>
+        <div>
+            <label for='genrefilter'>Genre:</label>
+            <select name="genrefilter">
+                <option value="0">--Choisissez un genre--</option>
+                <?php foreach ($genres as $genre):?>
+                    <option id="<?= intval($genre['id']) ?>" value="<?= intval($genre['id']) ?>"><?= $genre['name'] ?></option>
+                <?php endforeach ?>
+            </select>
+        </div>
+        <?php $platforms = $allGameController->getPlatforms() ?>
+        <div>
+            <label for="platformfilter">Plateformes:</label>
+            <select name="platformfilter">
+                <option value="0">--Choisissez une plateforme--</option>
+                <?php foreach ($platforms as $platform):?>
+                    <option id="<?= intval($platform['id']) ?>" value="<?= intval($platform['id']) ?>"><?= $platform['name'] ?></option>
+                <?php endforeach ?>
+            </select>
+        </div>
+        <?php $developpers = $allGameController->getDevs() ?>
+        <div>
+            <label for="devfilter">Developpeur:</label>
+            <select name="devfilter">
+                <option value="0">--Choisissez un Developpeur--</option>
+                <?php foreach ($developpers as $developper):?>
+                    <option id="<?= intval($developper['id']) ?>" value="<?= intval($developper['id']) ?>"><?= $developper['name'] ?></option>
+                <?php endforeach ?>
+            </select>
+        </div>
+        <?php $editors = $allGameController->getEditors() ?>
+        <div>
+            <p class="hidden errormsg">Vous devez obligatoirement choisir un editeur</p>
+            <label for="editor">Editeur:</label>
+            <select name="editorfilter">
+                <option value="0">--Choisissez un Editeur--</option>
+                <?php foreach ($editors as $editor):?>
+                    <option id="<?= intval($editor['id']) ?>" value="<?= intval($editor['id']) ?>"><?= $editor['name'] ?></option>
+                <?php endforeach ?>
+            </select>
+        </div>
+        <div>
+            <label for="orderfilter">Ordre:</label>
+            <select name="orderfilter">
+                <option value="alphabeticalasc">Alphabétique (croissant)</option>
+                <option value="alphabeticaldesc">Alphabétique (décroissant)</option>
+                <option value="creationdateasc">Date d'ajout (croissant)</option>
+                <option value="creationdatedesc">Date d'ajout (décroissant)</option>
+                <option value="releasedateasc">Année de sortie (croissant)</option>
+                <option value="releasedatedesc">Année de sortie (décroissant)</option>
+            </select>
+        </div>
+        <button type="submit">Filtrer</button>
+        <a href="index.php?p=all" class="reset">Réinitialiser filtre</a>
+    </form>
+</section>
+
+<section class="letterfilter" >
+    <ul>
+        <?php foreach(range('A','Z') as $i) : ?>
+            <li><a href="index.php?p=all&genrefilter=<?= $genreFilter ?>&platformfilter=<?= $platformFilter ?>&letterfilter=<?= $i ?>"><?= $i ?></a></li>
+            <?php if($i != "Z"): ?>
+                <li><?= "-" ?></li>
+            <?php endif ?>
+        <?php endforeach ?>
+    </ul>
+</section>
+
+<?php if (empty($games)): ?>
+    <p class="searchresult">Nous n'avons rien trouvé avec ces paramètres</p>
+<?php else: ?>
+    <table id="allgametable">
+        <thead>
+                <tr>
+                    <th>Jeux</th>
+                    <th>Plateformes:</th>
+                    <th>Genres:</th>
+                    <th>Année de parution:</th>
+                </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($games as $game): ?>
+                    <tr>
+                        <td>
+                            <a href="index.php?p=show&id=<?= $game['id'] ?>" class="gamename" >
+                                <img src="public/img/games/<?= $game['image'] ?>">
+                                <?= $game['name'] ?>
+                            </a>
+                        </td>
+                        <td>
+                            <?php $platforms = $allGameController->getGamePlatforms($game['id']) ?>
+                            <?php $i = 0 ?>
+                            <?php foreach ($platforms as $platform): ?>
+                                <?php if ($i < count($platforms)-1): ?>
+                                    <a href="index.php?p=all&platformfilter=<?= $platform['id'] ?>"> <?= $platform['name'] ?></a> /
+                                <?php else: ?>
+                                    <a href="index.php?p=all&platformfilter=<?= $platform['id'] ?>"> <?= $platform['name'] ?></a>
+                                <?php endif ?> 
+                                <?php $i++ ?>                        
+                            <?php endforeach ?>
+                        </td>
+                        <td>
+                            <?php $genres = $allGameController->getGameGenres($game['id']) ?>
+                            <?php $i = 0 ?>
+                            <?php foreach ($genres as $genre): ?>
+                                <?php if ($i < count($genres)-1): ?>
+                                    <a href="index.php?p=all&genrefilter=<?= $genre['id'] ?>"> <?= $genre['name'] ?></a> /
+                                <?php else: ?>
+                                    <a href="index.php?p=all&genrefilter=<?= $genre['id'] ?>"> <?= $genre['name'] ?></a>
+                                <?php endif ?> 
+                                <?php $i++ ?>                        
+                            <?php endforeach ?>
+                        </td>
+                        <td><?= $game['released_at'] ?></td>
+                    </tr>
+            <?php endforeach ?>
+        </tbody>   
+    </table>
+<?php endif ?>
+
+
+
+
+<section class="paging">
+    <nav>
+        <?php if ($page > 1): ?>
+        <a href="index.php?p=all&page=<?= $page -1 ?>&genrefilter= <?= $genreFilter ?>&platformfilter= <?= $platformFilter ?>&devfilter=<?= $devFilter ?>&editorfilter=<?= $editorFilter ?>&wordfilter= <?= $wordFilter ?>&orderfilter=<?= $orderFilter ?>&letterFilter=<?= $letterFilter ?>">Précedent</a>
+        <?php endif ?>
+        
+        <?php for ($i = 1; $i <= $nbPage; $i++) : ?>
+            <?php if ($i == $page) : ?>
+                <a href="index.php?p=all&page=<?= $i ?>&genrefilter= <?= $genreFilter ?>&platformfilter= <?= $platformFilter ?>&devfilter=<?= $devFilter ?>&editorfilter=<?= $editorFilter ?>&wordfilter= <?= $wordFilter ?>&orderfilter=<?= $orderFilter ?>&letterFilter=<?= $letterFilter ?>" class="currentpage"><?= $i ?></a>
+            <?php else : ?>
+                <a href="index.php?p=all&page=<?= $i ?>&genrefilter= <?= $genreFilter ?>&platformfilter= <?= $platformFilter ?>&devfilter=<?= $devFilter ?>&editorfilter=<?= $editorFilter ?>&wordfilter= <?= $wordFilter ?>&orderfilter=<?= $orderFilter ?>&letterFilter=<?= $letterFilter ?>"><?= $i ?></a>
+            <?php endif ?>
+        <?php endfor ?>
+
+        <?php if ($page < $nbPage): ?>
+            <a href="index.php?p=all&page=<?= $page +1 ?>&genrefilter= <?= $genreFilter ?>&platformfilter= <?= $platformFilter ?>&devfilter=<?= $devFilter ?>&editorfilter=<?= $editorFilter ?>&wordfilter= <?= $wordFilter ?>&orderfilter=<?= $orderFilter ?>&letterFilter=<?= $letterFilter ?>">Suivant</a>
+        <?php endif ?>
+    </nav>
+</section>

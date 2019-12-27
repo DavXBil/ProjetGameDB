@@ -1,0 +1,25 @@
+<!-- Si l'utilisateur n'est pas authentifié redirection vers la page d'accueil -->
+<?php if(!$session->checkAuthentication()): ?>
+    <?php header('Location: index.php') ?>
+<?php endif ?>
+
+<?php $user = new ShowUserController() ?>
+
+<?php $reviews = $user->getUserReviews() ?>
+<?php $userAddedGames = $user->getUserAddedGames() ?>
+
+<section class="showuser">
+    <article class="userdetails">
+        <h2>Informations de profil</h2>
+        <div>
+            <img src='/Projet-3wa/public/img/users/<?= $user->showUserImage() ?>' alt="image utilisateur">
+        </div>
+        <ul>
+            <li>- Pseudo: <?= $user->showName() ?></li>
+            <li>- Addresse E-mail: <?= $user->showMail() ?></li>
+            <li>- Jeux Evalués: <?= count($reviews) ?></li>
+            <li>- Jeux Ajoutés: <?= $userAddedGames['addedGames'] ?></li>
+        </ul>
+        <a href="index.php?p=editu&username=<?= $user->showName() ?>">Modifier les informations</a>
+    </article>
+</section>
