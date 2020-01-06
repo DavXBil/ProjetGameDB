@@ -21,28 +21,30 @@
      <?php $list = "game" ?>
 <?php endif ?>
 
+
 <?php switch ($list) {
 
         case 'game':
-            $adminLists = $adminController->showgames($page);
+            $toPassList = $adminController->showgames($page);
             break;
         
         case 'dev':
-            $adminLists = $adminController->showDevs($page);
+            $toPassList = $adminController->showDevs($page);
         break;
         
         case 'editor':
-            $adminLists = $adminController->showEditors($page);
+            $toPassList = $adminController->showEditors($page);
         break;
         
         case 'genre':
-            $adminLists = $adminController->showGenres($page);
+            $toPassList = $adminController->showGenres($page);
         break;
         
         case 'platform':
-            $adminLists = $adminController->showPlatforms($page);
+            $toPassList = $adminController->showPlatforms($page);
         break;
     } 
+
 ?>
 
 <!-- Lancement de la fonction de determination du nombre de pages -->
@@ -56,7 +58,7 @@
 <section id="adminlist">
     <ul class="list">
         <li>
-            <a href="index.php?p=admin&list=game"
+            <a href="index.php?p=admin&list=game" id="game"
                 <?php if ($list == "game"): ?>
                     class="currentpage"
                 <?php endif ?>>
@@ -64,35 +66,35 @@
             </a>
         </li>
         <li>
-            <a href="index.php?p=admin&list=dev"
+            <a href="index.php?p=admin&list=dev" id="dev"
                 <?php if ($list == "dev"): ?>
                     class="currentpage"
                 <?php endif ?>>
-            Gestion des Developpeurs
+                Gestion des Developpeurs
             </a>
         </li>
         <li>
-            <a href="index.php?p=admin&list=editor"
+            <a href="index.php?p=admin&list=editor" id="editor"
                 <?php if ($list == "editor"): ?>
                     class="currentpage"
                 <?php endif ?>>    
-            Gestion des Editeurs
+                Gestion des Editeurs
             </a>
         </li>
         <li>
-            <a href="index.php?p=admin&list=genre"
+            <a href="index.php?p=admin&list=genre" id="genre"
                 <?php if ($list == "genre"): ?>
                     class="currentpage"
                 <?php endif ?>>    
-            Gestion des Genres
+                Gestion des Genres
             </a>
         </li>
         <li>
-            <a href="index.php?p=admin&list=platform"
+            <a href="index.php?p=admin&list=platform" id="platform"
                 <?php if ($list == "platform"): ?>
                     class="currentpage"
                 <?php endif ?>>    
-            Gestion des Plateformes
+                 Gestion des Plateformes
             </a>
         </li>
     </ul>
@@ -106,21 +108,6 @@
 </section>
 
 <section class="paging">
-    <nav>
-        <?php if ($page > 1): ?>
-            <a href="index.php?p=admin&page=<?= $page -1 ?>&list=<?= $list ?>">Précedent</a>
-        <?php endif ?>     
-
-        <?php for ($i = 1; $i <= $nbPage; $i++) : ?>
-            <?php if ($i == $page) : ?>
-                <a href="index.php?p=admin&page=<?= $i ?>&list=<?= $list ?>" class="currentpage"><?= $i ?></a>
-            <?php else : ?>
-                <a href="index.php?p=admin&page=<?= $i ?>&list=<?= $list ?>"><?= $i ?></a>
-            <?php endif ?>
-        <?php endfor ?>
-
-        <?php if ($page < $nbPage): ?>
-            <a href="index.php?p=admin&page=<?= $page +1 ?>&list=<?= $list ?>">Suivant</a>
-        <?php endif ?>
+    <nav id="pagingnavbar">
     </nav>
 </section>

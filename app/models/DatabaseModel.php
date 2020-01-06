@@ -4,10 +4,10 @@
 class Database {
 
 	private $pdo;
-	private string $host = "localhost";
-	private string $user = "root";
-	private string $pass = "";
-	private string $dbname = "video_games_archives";
+	private $host = "localhost";
+	private $user = "root";
+	private $pass = "";
+	private $dbname = "video_games_archives";
 	private static $_instance;
 	
 	private function __construct() {

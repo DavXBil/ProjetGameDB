@@ -580,7 +580,7 @@ td:nth-child(2) {
     text-align: center;
 }
 
-#admingame, #admindev, #admineditor, #admingenre { 
+#admingame, #admindev, #admineditor, #admingenre, #adminplatform { 
     margin: auto;
     text-align: center;
 }
@@ -916,7 +916,7 @@ footer nav {
         text-align: center;
     }
 
-    #admindev, #admineditor, #admingenre {
+    #admindev, #admineditor, #admingenre, #adminplatform {
         width: 40%;
     }
 

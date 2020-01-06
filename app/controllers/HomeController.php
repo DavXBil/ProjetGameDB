@@ -4,7 +4,7 @@ require ''.ROOT.'/app/models/GameModel.php';
 
 class HomeController {
 
-    private object $game;
+    private $game;
 
     public function __construct()
     {

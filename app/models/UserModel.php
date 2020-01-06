@@ -2,6 +2,9 @@
 
 class UserModel {
 
+    private $mail;
+    private $password;
+
    public function __construct() {
         $this->_instance = Database::getInstance();
     }

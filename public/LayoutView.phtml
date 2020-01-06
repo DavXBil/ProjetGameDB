@@ -82,6 +82,11 @@
                 <?php endif?>
             </nav>
         </footer>
+        <script src="public/js/main.js"></script>
+        <script>
+            let passedArray = <?= json_encode($toPassList) ?>
+        </script>
+        <script src="public/js/ajax.js"></script>
+        
     </body>
-    <script src="public/js/main.js"></script>
 </html>

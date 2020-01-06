@@ -10,7 +10,7 @@ class GameModel {
 	}
 
 	/*Recherche de tous les jeux en BDD*/
-	public function findAll($limit, $start) {
+	public function findAll() {
 		$sql = 'SELECT SQL_CALC_FOUND_ROWS game.id, game.name, game.dev_id, game.editor_id, game.released_at, game.created_at, game.description, game.user_id, username, game.image
 		FROM game
 		INNER JOIN user ON game.user_id = user.id
@@ -39,7 +39,7 @@ class GameModel {
 		}
 
 		/*--------------Test des filtres de recherches--------------*/
-
+		
 		/*Si des données de filtre de genre sont enregistré et sur une valeur valide*/
 		if (!empty($_POST['genrefilter']) || !empty($_GET['genrefilter'])) {
 			if (!empty($_POST['genrefilter']) && $_POST['genrefilter'] != 0) {
@@ -48,7 +48,6 @@ class GameModel {
 				$sql .= 'AND genrelink.genre_id = ? ' ;
 				array_push($values,$genreFilter);
 			} elseif (!empty($_GET['genrefilter']) && $_GET['genrefilter'] != 0 ) {
-				echo'hey';
 				$genreFilter = $_GET['genrefilter'];
 				/*On ajoute à la requête*/
 				$sql .= 'AND genrelink.genre_id = ? ' ;
@@ -101,14 +100,8 @@ class GameModel {
 		}
 
 		//Si un ordre de tri est enregistré
-		if (isset($_POST['orderfilter'])) {
-			$orderFilter = $_POST['orderfilter'];
-		} elseif (isset($_GET['orderfilter'])) {
-			$orderFilter = $_GET['orderfilter'];
-		} else {
-			//Sinon ordre par défaut
-			$orderFilter = 'alphabeticalasc';
-		}
+
+		$orderFilter = $_POST['orderfilter'] ?? $_GET['orderfilter'] ?? $orderFilter = 'alphabeticalasc';
 
 		//Test du choix d'ordre de tri
 		switch ($orderFilter) {
@@ -133,7 +126,7 @@ class GameModel {
 		}
 
 		/*Tri par ordre choisi ou par défaut*/
-		$sql .= 'ORDER BY '.$order.' LIMIT '.$limit.' OFFSET '.$start.'';
+		$sql .= 'ORDER BY '.$order.'';
 
 		return $this->_instance->query($sql, $values);
 	}
@@ -156,31 +149,31 @@ class GameModel {
 		return $this->_instance->query($sql);
 	}
 	/*Requete de recherche de jeux avec limite pour le tableau admin*/
-	public function findLimitGames($limit, $start) {
+	public function findLimitGames() {
 		$sql = 'SELECT SQL_CALC_FOUND_ROWS game.id, game.name, game.dev_id, game.editor_id, game.released_at, game.created_at, game.description, game.user_id, username, game.image
 		FROM game
 		INNER JOIN user ON game.user_id = user.id
-		ORDER BY game.name ASC LIMIT '.$limit.' OFFSET '.$start.'';
+		ORDER BY game.name ASC';
 		return $this->_instance->query($sql);
 	}
 	/*Requete de recherche de developpeurs avec limite pour le tableau admin*/
-	public function findLimitDevs($limit, $start) {
-		$sql = 'SELECT SQL_CALC_FOUND_ROWS id, developper.name FROM developper ORDER BY name ASC LIMIT '.$limit.' OFFSET '.$start.'';
+	public function findLimitDevs() {
+		$sql = 'SELECT SQL_CALC_FOUND_ROWS id, developper.name FROM developper ORDER BY name ASC';
 		return $this->_instance->query($sql);
 	}
 	/*Requête de recherche des éditeurs avec limite pour le tableau admin*/
-	public function findLimitEditors($limit, $start) {
-		$sql = 'SELECT SQL_CALC_FOUND_ROWS id, editor.name FROM editor ORDER BY name ASC LIMIT '.$limit.' OFFSET '.$start.'';
+	public function findLimitEditors() {
+		$sql = 'SELECT SQL_CALC_FOUND_ROWS id, editor.name FROM editor ORDER BY name ASC';
 		return $this->_instance->query($sql);
 	}
 	/*Requête de recherche des genres avec limite pour le tableau admin*/
-	public function findLimitGenres($limit, $start) {
-		$sql = 'SELECT SQL_CALC_FOUND_ROWS id, genre.name FROM genre ORDER BY name ASC LIMIT '.$limit.' OFFSET '.$start.'';
+	public function findLimitGenres() {
+		$sql = 'SELECT SQL_CALC_FOUND_ROWS id, genre.name FROM genre ORDER BY name ASC';
 		return $this->_instance->query($sql);
 	}
 	/*Requête de recherche des plateformes avec limite pour le tableau admin*/
-	public function findLimitPlatforms($limit, $start) {
-		$sql = 'SELECT SQL_CALC_FOUND_ROWS id, platform.name FROM platform ORDER BY name ASC LIMIT '.$limit.' OFFSET '.$start.'';
+	public function findLimitPlatforms() {
+		$sql = 'SELECT SQL_CALC_FOUND_ROWS id, platform.name FROM platform ORDER BY name ASC';
 		return $this->_instance->query($sql);
 	}
 

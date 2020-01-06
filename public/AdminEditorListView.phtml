@@ -8,17 +8,4 @@
 
 
 <table id="admineditor">
-    <thead>
-        <tr>
-            <th>Nom</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($adminLists as $adminList): ?>
-            <tr>
-                <td><a href="index.php?p=all&editorfilter=<?= $adminList['id'] ?>"><?= $adminList['name'] ?></a></td>
-                <td><a href="index.php?p=admin&action=delgame&id=<?=$adminList['id'] ?>&list=editor"><i class="fas fa-times"></i></a></td>
-            </tr>
-        <?php endforeach ?>
-    </tbody>
 </table>

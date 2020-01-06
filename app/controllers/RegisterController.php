@@ -2,7 +2,7 @@
 
 class RegisterController {
 
-    private object $userModel;
+    private $userModel;
 
     public function register() {
 

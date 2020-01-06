@@ -4,18 +4,24 @@ require ''.ROOT.'/app/controllers/GameController.php';
 
 class AllGameController extends GameController {
 
-    private int $limit = 80;
+    private $limit = 80;
 
     public function __construct() {
 
         $this->game = new GameModel();
     }
     //récupération des jeux
-    public function getGames($page) {
-        
-        $start = ($page - 1) * $this->limit;
-
-        return $this->game->findAll($this->limit, $start);
+    public function getGames() {
+        $calledGames = array_unique($this->game->findAll(), SORT_REGULAR);
+        $games= [];
+        foreach ($calledGames as $game) {
+            $platform = $this->getGamePlatforms($game['id']);
+            $genre = $this->getGameGenres($game['id']);
+            $game['platform'] = $platform;
+            $game['genre'] = $genre;
+            array_push($games, $game);
+        }
+        return $games;
     }
     //récupération du nombre de page
     public function getPageNumbers() {

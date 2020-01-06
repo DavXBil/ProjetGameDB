@@ -5,9 +5,9 @@ require ''.ROOT.'/app/models/GameModel.php';
 
 class AdminController {
 
-  private object $game;
-  private object $user;
-  private int $limit = 20;
+  private $game;
+  private $user;
+  private $limit = 20;
 
   public function __construct() {
 
@@ -16,29 +16,25 @@ class AdminController {
   }
 
   /*Méthode d'affichage de tableau des jeux*/
-  public function showgames($nbPage) {
-    $start = ($nbPage - 1) * $this->limit;
-    return $this->game->findLimitGames($this->limit, $start);
+  public function showgames() {
+    $games = $this->game->findLimitGames();
+    return $games;
   }
   /*Méthode d'affichage de tableau des devs*/
-  public function showDevs($nbPage) {
-    $start = ($nbPage - 1) * $this->limit;
-    return $this->game->findLimitDevs($this->limit, $start);
+  public function showDevs() {
+    return $this->game->findLimitDevs();
   }
   /*Méthode d'affichage de tableau des éditeurs*/
-  public function showEditors($nbPage) {
-    $start = ($nbPage - 1) * $this->limit;
-    return $this->game->findLimitEditors($this->limit, $start);
+  public function showEditors() {
+    return $this->game->findLimitEditors();
   }
   /*Méthode d'affichage de tableau des genres*/
-  public function showGenres($nbPage) {
-    $start = ($nbPage - 1) * $this->limit;
-    return $this->game->findLimitGenres($this->limit, $start);
+  public function showGenres() {
+    return $this->game->findLimitGenres();
   }
   /*Méthode d'affichage de tableau des plateformes*/
-  public function showPlatforms($nbPage) {
-    $start = ($nbPage - 1) * $this->limit;
-    return $this->game->findLimitPlatforms($this->limit, $start);
+  public function showPlatforms() {
+    return $this->game->findLimitPlatforms();
   }
 /*Méthode de récupération du nombre de pages pour la pagination*/
   public function getPageNumbers() {
@@ -151,6 +147,7 @@ class AdminController {
   }
   /*Méthode de suppression d'un élement*/
   public function removeElement($toRemoveElement, $list) {
+    $table = "";
     switch ($list) {
       case 'dev':
         $table = "developper";
