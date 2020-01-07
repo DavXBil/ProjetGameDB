@@ -4,7 +4,9 @@ let currentPage = 1
 let w = window
 let pagingNavBar = document.getElementById('pagingnavbar')
 
+console.log(passedArray)
 passedArray = Object.entries(passedArray).map(e => e[1])
+console.log(passedArray)
 
 for (let i = 0; i <= passedArray.length - 1; i++) {
 	
@@ -29,7 +31,7 @@ function loadFile() {
 	let tableBody = []
 	let elements = w["array" + currentPage]
 
-		if (window.location.href.indexOf("http://projet3wa/index.php?p=all") != -1) {
+		if (window.location.href.indexOf("index.php?p=all") != -1) {
 			url = window.location.href
 			tableHeader = 
 			`<thead>
@@ -74,7 +76,7 @@ function loadFile() {
 				})			
 			document.getElementById('allgametable').innerHTML = tableHeader + tableBody
 
-		} else if (window.location.href.indexOf("http://projet3wa/index.php?p=admin") != -1) {
+		} else if (window.location.href.indexOf("index.php?p=admin") != -1) {
 
 			let list = document.querySelector('.list').querySelector('.currentpage')
 			let listId = list.id
