@@ -2,7 +2,7 @@
 
 class EditUserController {
 
-    private $user;
+    private object $user;
 
     public function __construct() {
 

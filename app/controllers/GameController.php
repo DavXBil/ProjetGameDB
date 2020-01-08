@@ -4,7 +4,7 @@ require ''.ROOT.'/app/models/GameModel.php';
 
 class GameController {
 
-    protected $game;
+    protected object $game;
 
     public function __construct() {
         $this->game = new GameModel();

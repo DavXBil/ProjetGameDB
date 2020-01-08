@@ -6,8 +6,6 @@ require ''.ROOT.'/app/controllers/GameController.php';
 
 class ShowGameController extends GameController {
 
-
-
     public function __construct()
     {
         parent::__construct();

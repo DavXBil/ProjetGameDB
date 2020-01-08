@@ -4,9 +4,8 @@ let currentPage = 1
 let w = window
 let pagingNavBar = document.getElementById('pagingnavbar')
 
-console.log(passedArray)
 passedArray = Object.entries(passedArray).map(e => e[1])
-console.log(passedArray)
+
 
 for (let i = 0; i <= passedArray.length - 1; i++) {
 	

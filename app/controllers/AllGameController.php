@@ -4,7 +4,7 @@ require ''.ROOT.'/app/controllers/GameController.php';
 
 class AllGameController extends GameController {
 
-    private $limit = 80;
+    private int $limit = 80;
 
     public function __construct() {
 
@@ -15,10 +15,9 @@ class AllGameController extends GameController {
         $calledGames = array_unique($this->game->findAll(), SORT_REGULAR);
         $games= [];
         foreach ($calledGames as $game) {
-            $platform = $this->getGamePlatforms($game['id']);
-            $genre = $this->getGameGenres($game['id']);
-            $game['platform'] = $platform;
-            $game['genre'] = $genre;
+
+            $game['platform'] = [...$this->getGamePlatforms($game['id'])];
+            $game['genre'] = [...$this->getGameGenres($game['id'])];
             array_push($games, $game);
         }
         return $games;

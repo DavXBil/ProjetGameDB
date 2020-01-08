@@ -5,9 +5,9 @@ require ''.ROOT.'/app/models/GameModel.php';
 
 class AdminController {
 
-  private $game;
-  private $user;
-  private $limit = 20;
+  private object $game;
+  private object $user;
+  private int $limit = 20;
 
   public function __construct() {
 

@@ -4,8 +4,8 @@ require ''.ROOT.'/app/models/GameModel.php';
 
 class ShowUserController {
 
-    private $user;
-    private $gameModel;
+    private object $user;
+    private object $gameModel;
 
     public function __construct() {
 

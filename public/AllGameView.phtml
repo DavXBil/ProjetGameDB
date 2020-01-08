@@ -1,62 +1,23 @@
 <?php $allGameController = new AllGameController() ?> 
-<!-- Détermination de la page actuelle -->
-<?php if(!empty($_GET['page'])) : ?>
-    <?php $page = $_GET['page'] ?>
-<?php else : ?>
-     <?php $page = 1 ?>
-<?php endif ?>
-
-<?php $genreFilter = 0 ?>
-<?php $platformFilter = 0 ?>
-<?php $devFilter = 0 ?>
-<?php $editorFilter = 0 ?>
-<?php $wordFilter = "" ?>
-<?php $orderFilter = "alphabeticalasc" ?>
-<?php $letterFilter = "" ?>
 
 
     <!-- ------Verification des filtre de recherche------  -->
 
     <!-- filtre du champs de recherche -->
-    <?php if (isset($_POST['search'])): ?>
-        <?php $wordFilter = $_POST['search'] ?>
-    <?php elseif (isset($_GET['search'])): ?>
-        <?php $wordFilter = $_GET['search'] ?>
-    <?php endif ?>
+    <?php $wordFilter =  $_GET['search'] ?? $_POST['search'] ?? "" ?>
     <!-- filtre de genre -->
-    <?php if (isset($_POST['genrefilter'])): ?>
-        <?php $genreFilter = $_POST['genrefilter'] ?>
-    <?php elseif (isset($_GET['genrefilter'])): ?>
-        <?php $genreFilter = $_GET['genrefilter'] ?>
-    <?php endif ?>
+    <?php $genreFilter = $_GET['genrefilter'] ?? $_POST['genrefilter'] ?? 0 ?>
     <!-- filtre de plateforme -->
-    <?php if (isset($_POST['platformfilter'])): ?>
-        <?php $platformFilter = $_POST['platformfilter'] ?>
-    <?php elseif (isset($_GET['platformfilter'])): ?>
-        <?php $platformFilter = $_GET['platformfilter'] ?>
-    <?php endif ?>
+    <?php $platformFilter = $_GET['platformfilter'] ?? $_POST['platformfilter'] ?? 0 ?>
     <!-- filtre de dev -->
-    <?php if (isset($_POST['devfilter'])): ?>
-        <?php $devFilter = $_POST['devfilter'] ?>
-    <?php elseif (isset($_GET['devfilter'])): ?>
-        <?php $devFilter = $_GET['devfilter'] ?>
-    <?php endif ?>
+    <?php $devFilter = $_GET['devfilter'] ?? $_POST['devfilter'] ?? 0 ?>
     <!-- filtre de dev -->
-    <?php if (isset($_POST['editorfilter'])): ?>
-        <?php $editorFilter = $_POST['editorfilter'] ?>
-    <?php elseif (isset($_GET['editorfilter'])): ?>
-        <?php $editorFilter = $_GET['editorfilter'] ?>
-    <?php endif ?>
+    <?php $editorFilter = $_GET['editorfilter'] ?? $_POST['editorfilter'] ?? 0 ?>
     <!-- ordre de tri -->
-    <?php if (isset($_POST['orderfilter'])): ?>
-        <?php $orderFilter = $_POST['orderfilter'] ?>
-    <?php elseif (isset($_GET['orderfilter'])): ?>
-        <?php $orderFilter = $_GET['orderfilter'] ?>
-    <?php endif ?>
+    <?php $orderFilter = $_GET['orderfilter'] ?? $_POST['orderfilter'] ?? "alphabeticalasc" ?>
     <!-- filtre de tri par lettre -->
-    <?php if (isset($_GET['letterfilter'])): ?>
-        <?php $letterFilter = $_GET['letterfilter'] ?>
-    <?php endif ?>
+    <?php $letterFilter = $_GET['letterfilter'] ?? "" ?>
+
 
 <!-- récupération des jeux selon les filtres -->
 <?php $games = $allGameController->getGames() ?>
