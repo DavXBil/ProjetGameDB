@@ -21,6 +21,7 @@
 
 <!-- récupération des jeux selon les filtres -->
 <?php $games = $allGameController->getGames() ?>
+<!-- variable a passer en javascript -->
 <?php $toPassList = $games ?>
 <!-- récupération du nombre de pages pour la pagination -->
 <?php  $nbPage = $allGameController->getPageNumbers() ?>
@@ -107,9 +108,9 @@
         <thead>
                 <tr>
                     <th>Jeux</th>
-                    <th>Plateformes:</th>
-                    <th>Genres:</th>
-                    <th>Année de parution:</th>
+                    <th>Plateformes</th>
+                    <th>Genres</th>
+                    <th>Année de parution</th>
                 </tr>
         </thead>
         <tbody>
