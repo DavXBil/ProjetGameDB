@@ -195,7 +195,8 @@
             </li>
             <li>
                 <label for="picture">Photo du jeu:</label>
-                <input type="file" id="picture" name="picture" accept=".jpg,.png">
+                <img src="public/img/games/<?= $toEditGame['image'] ?>" class='imgpreview'>
+                <input type="file" id="picture" name="picture" accept=".jpg,.png" onchange="imagePreview(event)">
             </li>
         </ul>
         <button type="submit" id="addBtn" >Enregistrer</button>

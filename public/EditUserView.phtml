@@ -39,7 +39,8 @@
             </li> 
             <li>
                 <label for="userimage">Image utilisateur</label>
-                <input type="file" name="userimage"  id="userimage">
+                <img src="public/img/users/defaultimg.jpg" class='imgpreview'>
+                <input type="file" name="userimage"  id="userimage" onchange="imagePreview(event)">
             </li>  
             <button type="submit" id="regbtn">Enregistrer</button>
         </ul>  
