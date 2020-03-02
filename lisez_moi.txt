@@ -1,3 +1,7 @@
+Installation de wamp server requise.
+
+Le fichier SQL à importer dans phpmyAdmin se nomme "video_games_archives.sql" et se trouve à la racine du projet.
+
 Informations de base de données:
 
 DatabaseModel.php: ligne 5 à 10
