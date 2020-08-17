@@ -204,6 +204,19 @@ table {
     display:none;
 }
 
+#regbtn[disabled], #addBtn[disabled] {
+    color: rgb(104, 104, 104);
+    border-color: rgb(104, 104, 104);
+}
+
+#regbtn[disabled]:hover, #addBtn[disabled]:hover {
+    cursor: default;
+    background-color: rgb(59, 59, 59);
+    color: rgb(104, 104, 104);
+    border-color: rgb(104, 104, 104);
+}
+
+
 #loginmsg {
     display: inline;
     flex-basis: 76%;
@@ -717,19 +730,6 @@ td:nth-child(2) {
 .register form {
     margin: 35px;
     padding-right: 35px; 
-}
-
-#regbtn[disabled] {
-    
-    color: rgb(104, 104, 104);
-    border-color: rgb(104, 104, 104);
-}
-
-#regbtn[disabled]:hover {
-    cursor: default;
-    background-color: rgb(59, 59, 59);
-    color: rgb(104, 104, 104);
-    border-color: rgb(104, 104, 104);
 }
 
 /*-----------------------SHOWUSER-----------------------*/
