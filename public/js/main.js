@@ -8,6 +8,8 @@ let addBtn = document.getElementById("addbtn")*/
 
 //Bouton d'enregistrement d'utilisateur
 const regBtn = document.getElementById('regbtn')
+//Bouton reininitialisation de formulaire
+const resetBtn = document.getElementById("resetbtn")
 //Bouton d'ajout de jeu
 const addBtn = document.getElementById("addBtn")
 //Message d'erreur de champs mail
@@ -34,7 +36,7 @@ let platformNb = 1
 /////////////////////////////////////////////////////////////////////////////////////////
 
 //Activation/Désactivation des bouton submit
-function disableEnableSubmit(value) {
+function toggleSubmit(value) {
     if (addBtn !== null) {
         addBtn.disabled = value
     } else if (regBtn !== null) {
@@ -48,11 +50,11 @@ function checkEmpty(field) {
     if (field.value == "") {  
         field.classList.add('error')
         field.placeholder = "Ce champ doit être rempli"
-        disableEnableSubmit(true)        
+        toggleSubmit(true)        
     } else {
         //Sinon on retire l'erreur
         field.classList.remove('error')
-        disableEnableSubmit(false) 
+        toggleSubmit(false) 
     }
 }
 
@@ -63,12 +65,12 @@ function checkMail(field) {
     if (!regex.test(field.value)) {
         field.classList.add('error')
         errorMail.classList.remove('hidden')
-        disableEnableSubmit(true) 
+        toggleSubmit(true) 
     } else {
     //Si oui on retire l'erreur
         field.classList.remove('error')
         errorMail.classList.add('hidden')
-        disableEnableSubmit(false) 
+        toggleSubmit(false) 
     }
 }
 
@@ -77,12 +79,13 @@ function checkPassword(field) {
     if (field.value.length < 7) {
         //Si non, erreur
         field.classList.add('error')
-        field.placeholder = "Mot-de-passe trop court"
-        disableEnableSubmit(true) 
+        errorPswrd.classList.remove('hidden')
+        toggleSubmit(true) 
     } else {
         //Si oui, on retire l'erreur
         field.classList.remove('error')
-        disableEnableSubmit(false) 
+        errorPswrd.classList.add('hidden')
+        toggleSubmit(false) 
     }
     return field.value
 }
@@ -93,12 +96,12 @@ function confirmPswrd(field, password) {
     if (field.value !== password.value) {
         field.classList.add('error')
         errorPswrd.classList.remove('hidden') 
-        disableEnableSubmit(true)        
+        toggleSubmit(true)        
     } else {
     //Oui? on retire l'erreur
         field.classList.remove('error')
         errorPswrd.classList.add('hidden')
-        disableEnableSubmit(false) 
+        toggleSubmit(false) 
     }
 }
 
@@ -170,6 +173,7 @@ function addPlatformSelect() {
         addPlatformFieldBtn.classList.add('disabled')
     }
 }
+
 // Fonction de retrait de champs select de plateforme
 function removePlatformSelect() {
     if (platformNb >= 2) {
@@ -211,7 +215,13 @@ function readMoreReview(e) {
 function imagePreview(e){
     let preview = document.querySelector('.imgpreview')
     preview.src =  URL.createObjectURL(e.target.files[0]) 
-  }
+}
+
+function resetPreview() {
+    let preview = document.querySelector('.imgpreview')
+    URL.revokeObjectURL(preview.src)
+    preview.src = "public/img/users/defaultimg.jpg"
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // CODE PRINCIPAL                                                                      //
@@ -237,4 +247,8 @@ if (addPlatformFieldBtn) {
 
 if (removePlatformFieldBtn) {
     removePlatformFieldBtn.addEventListener('click', removePlatformSelect)
+}
+
+if (resetBtn) {
+   resetBtn.addEventListener("click", resetPreview)  
 }

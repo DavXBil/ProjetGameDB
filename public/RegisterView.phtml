@@ -21,6 +21,7 @@
         </li>    
         <li>
             <label for="password">Mot-de-Passe:</label>
+            <p class="hidden errormsg errorpswrd">Le mot de passe est trop court</p>
             <input type="password" name="password" id="password" onblur="checkForm(this)">
         </li>
         <li>
@@ -34,7 +35,7 @@
             <input type="file" name="userimage" id="userimage" accept="image/*" onchange="imagePreview(event)">
         </li>  
         <button type="submit" id="regbtn">Enregistrer</button>
-        <button type="reset">Annuler</button> 
+        <button type="reset" id="resetbtn">Annuler</button> 
     </ul>  
     </form>
 </section> 

@@ -31,8 +31,12 @@ function loadFile() {
 	let tableBody = []
 	let elements = w["array" + currentPage]
 
+		//Somme nous sur la page "Tous les Jeux"?
 		if (window.location.href.indexOf("index.php?p=all") != -1) {
+
+			//Création du tableau correspondant
 			url = window.location.href
+
 			tableHeader = 
 			`<thead>
 				<tr>
@@ -44,6 +48,7 @@ function loadFile() {
 			</thead>
 			<tbody>`
 
+			//Parcours des element et creation du corps du tableau
 			elements.forEach(function(element) {
 				tableBody += 
 					`<tr>
@@ -73,15 +78,20 @@ function loadFile() {
 							}
 						tableBody += `<td>${element.released_at}</td></tr>
 						</tbody>`
-				})			
+				})
+			
+			//Ajout du tableau dans le DOM
 			document.getElementById('allgametable').innerHTML = tableHeader + tableBody
-
+				
+		// Sinon somme nous sur la page admin?
 		} else if (window.location.href.indexOf("index.php?p=admin") != -1) {
 
+			
 			let list = document.querySelector('.list').querySelector('.currentpage')
 			let listId = list.id
 			url = list.getAttribute('href')
 			
+			//Quel tableau cherchons nous à afficher?
 			switch (listId) {
 				case 'game':
 					table = 'admingame'
@@ -99,7 +109,7 @@ function loadFile() {
 					table = 'adminplatform'
 					break;
 			}
-
+			//liste des jeux
 			if (table === 'admingame') {
 				
 				tableHeader = 
@@ -124,6 +134,7 @@ function loadFile() {
 							</tr>
 						</tbody>`
 				};
+			//les autres tableaux ont une construction similaire et rentre donc dans cette condition
 			} else {
 
 				tableHeader = 
@@ -143,18 +154,22 @@ function loadFile() {
 						</tbody>`
 				}
 			}	
-
+			//Ajout dans le DOM
 			document.getElementById(table).innerHTML = tableHeader + tableBody
 		}
-
+	
+	
 	xhr.open('GET', url);
 
 	xhr.addEventListener('readystatechange', function() {
 
 		if (xhr.readyState === 4 && xhr.status === 200) { // Si le fichier est chargé sans erreur
 
+			//Création de la pagination
+			
 			let paging = ""
 
+			
 			if (currentPage > 1) {
 				paging += `<a href="#" name="${currentPage}" class="paginglink">Précedent</a>`
 			}

@@ -719,6 +719,19 @@ td:nth-child(2) {
     padding-right: 35px; 
 }
 
+#regbtn[disabled] {
+    
+    color: rgb(104, 104, 104);
+    border-color: rgb(104, 104, 104);
+}
+
+#regbtn[disabled]:hover {
+    cursor: default;
+    background-color: rgb(59, 59, 59);
+    color: rgb(104, 104, 104);
+    border-color: rgb(104, 104, 104);
+}
+
 /*-----------------------SHOWUSER-----------------------*/
 
 .showuser {
@@ -912,6 +925,10 @@ footer nav {
 
     .register {
         font-size: 2rem;
+    }
+
+    .register label {
+        width: 26%;
     }
 
     .userdetails img {
