@@ -50,53 +50,21 @@
                     <i id="addplatform" class="fas fa-plus moreinput"></i>
                     <i id="removeplatform" class="fas fa-minus lessinput disabled"></i>
                 </div>
-                <select name="platform1">
-                    <option value="0">--Choisissez une plateforme--</option>
-                    <?php foreach ($platforms as $platform):?>
-                        <option id="<?= intval($platform['id']) ?>" value="<?= intval($platform['id']) ?>"><?= $platform['name'] ?></option>
-                    <?php endforeach ?>
-                </select>
-            </li>
-            <li id="platform2" class="hidden">
-                <select name="platform2" id="platformselect2">
-                    <option value="0">--Choisissez une plateforme--</option>
-                    <?php foreach ($platforms as $platform):?>
-                        <option id="<?= intval($platform['id']) ?>" value="<?= intval($platform['id']) ?>"><?= $platform['name'] ?></option>
-                    <?php endforeach ?>
-                </select>
-            </li>
-            <li id="platform3" class="hidden">
-                <select name="platform3" id="platformselect3">
-                    <option value="0">--Choisissez une plateforme--</option>                
-                    <?php foreach ($platforms as $platform):?>
-                        <option id="<?= intval($platform['id']) ?>" value="<?= intval($platform['id']) ?>"><?= $platform['name'] ?></option>
-                    <?php endforeach ?>
-                </select>
-            </li>
-            <li id="platform4" class="hidden">
-                <select name="platform4" id="platformselect4">
-                    <option value="0">--Choisissez une plateforme--</option>
-                    <?php foreach ($platforms as $platform):?>
-                        <option id="<?= intval($platform['id']) ?>" value="<?= intval($platform['id']) ?>"><?= $platform['name'] ?></option>
-                    <?php endforeach ?>
-                </select>
-            </li>
-            <li id="platform5" class="hidden">
-                <select name="platform5" id="platformselect5">
-                    <option value="0">--Choisissez une plateforme--</option>
-                    <?php foreach ($platforms as $platform):?>
-                        <option id="<?= intval($platform['id']) ?>" value="<?= intval($platform['id']) ?>"><?= $platform['name'] ?></option>
-                    <?php endforeach ?>
-                </select>
-            </li>
-            <li id="platform6" class="hidden">
-                <select name="platform6" id="platformselect6">
-                    <option value="0">--Choisissez une plateforme--</option>
-                    <?php foreach ($platforms as $platform):?>
-                        <option id="<?= intval($platform['id']) ?>" value="<?= intval($platform['id']) ?>"><?= $platform['name'] ?></option>
-                    <?php endforeach ?>
-                </select>
-            </li>
+                <?php for ($i=1; $i <= 6; $i++): ?>
+                    <?php if($i > 1): ?>
+                        <li id="platform<?= $i ?>" class="hidden">
+                        <select name="platform<?= $i ?>" id="platformselect<?=$i?>">
+                    <?php else: ?>
+                        <select name="platform<?= $i ?>">
+                    <?php endif ?>
+                        <option value="0">--Choisissez une plateforme--</option>
+                        <?php foreach ($platforms as $platform):?>
+                            <option id="<?= intval($platform['id']) ?>" value="<?= intval($platform['id']) ?>"><?= $platform['name'] ?></option>
+                        <?php endforeach ?>
+                    </select>
+                    </li>
+                <?php endfor ?>
+                
             <?php $genres = $addGameController->getGenres() ?>
             <li>
                 <label for="genre1">Genres:</label>
@@ -104,29 +72,21 @@
                     <i id="addgenre" class="fas fa-plus moreinput"></i>
                     <i id="removegenre" class="fas fa-minus lessinput disabled"></i>
                 </div>
-                <select name="genre1">
-                    <option value="0">--Choisissez un genre--</option>
-                    <?php foreach ($genres as $genre):?>
-                        <option id="<?= intval($genre['id']) ?>" value="<?= intval($genre['id']) ?>"><?= $genre['name'] ?></option>
-                    <?php endforeach ?>
-                </select>
-            </li>
-            <li id="genre2" class="hidden">
-                <select name="genre2" id="genreselect2">
-                <option value="0">--Choisissez un genre--</option>
-                    <?php foreach ($genres as $genre):?>
-                        <option id="<?= intval($genre['id']) ?>" value="<?= intval($genre['id']) ?>"><?= $genre['name'] ?></option>
-                    <?php endforeach ?>
-                </select>
-            </li>
-            <li id="genre3" class="hidden">
-                <select name="genre3" id="genreselect3">
-                <option value="0">--Choisissez un genre--</option>
-                    <?php foreach ($genres as $genre):?>
-                        <option id="<?= intval($genre['id']) ?>" value="<?= intval($genre['id']) ?>"><?= $genre['name'] ?></option>
-                    <?php endforeach ?>
-                </select>
-            </li>
+                <?php for ($j=1; $j <= 3; $j++): ?>
+                    <?php if($j > 1): ?>
+                        <li id="genre<?= $j ?>" class="hidden">
+                        <select name="genre<?= $j ?>" id="genreselect<?= $j ?>">
+                    <?php else: ?>
+                        <select name="genre<?= $j ?>">
+                    <?php endif ?>
+                        <option value="0">--Choisissez un genre--</option>
+                        <?php foreach ($genres as $genre):?>
+                            <option id="<?= intval($genre['id']) ?>" value="<?= intval($genre['id']) ?>"><?= $genre['name'] ?></option>
+                        <?php endforeach ?>
+                    </select>
+                    </li>
+                <?php endfor ?>
+
             <li>
                 <label for="picture">Photo du jeu:</label>
                 <img src="public/img/games/defaultgame.png" class='imgpreview' >

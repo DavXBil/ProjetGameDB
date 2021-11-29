@@ -50,145 +50,47 @@
             <?php $toEditGamePlatforms = $editController->getToEditGamePlatforms($toEditGameId) ?>
             <?php $toEditGameGenres = $editController->getToEditGameGenres($toEditGameId) ?>
             
-            <li>
-                <label for="platform1">Plateformes:</label>
-                <select name="platform1" onchange="checkSelect(this)">
-                <option value="0">--Choisissez une plateforme--</option>
-                    <?php foreach ($platforms as $platform):?>
-                        <option id="<?= intval($platform['id']) ?>" value="<?= intval($platform['id']) ?>"
-                            <?php if (array_key_exists(0, $toEditGamePlatforms)): ?>
-                                <?php if($platform['id'] == $toEditGamePlatforms[0]['id']): ?>
-                                    <?php echo "selected" ?>
-                                <?php endif ?>
-                            <?php endif ?>>
-                            <?= $platform['name'] ?>
-                        </option>
-                    <?php endforeach ?>
-                </select>
-            </li>
-            <li id="platform2">
-                <select name="platform2" onchange="checkSelect(this)">
+            <label for="platform1">Plateformes:</label>
+            <?php $gamePlatformCount = 0 ?>
+            <?php for ($i=1; $i <= 6; $i++): ?>
+                <li>  
+                    <select name="platform<?= $i ?>" onchange="checkSelect(this)">
                     <option value="0">--Choisissez une plateforme--</option>
-                    <?php foreach ($platforms as $platform):?>
-                        <option id="<?= intval($platform['id']) ?>" value="<?= intval($platform['id']) ?>"
-                            <?php if (array_key_exists(1, $toEditGamePlatforms)): ?>
-                                <?php if($platform['id'] == $toEditGamePlatforms[1]['id']): ?>
-                                    <?php echo "selected" ?>
-                                <?php endif ?>
-                            <?php endif ?>>
-                            <?= $platform['name'] ?>
-                        </option>
-                    <?php endforeach ?>
-                </select>
-            </li>
-            <li id="platform3">
-                             
-                <select name="platform3" onchange="checkSelect(this)">
-                <option value="0">--Choisissez une plateforme--</option>
-                    <?php foreach ($platforms as $platform):?>
-                        <option id="<?= intval($platform['id']) ?>" value="<?= intval($platform['id']) ?>"
-                            <?php if (array_key_exists(2, $toEditGamePlatforms)): ?>
-                                <?php if($platform['id'] == $toEditGamePlatforms[2]['id']): ?>
-                                    <?php echo "selected" ?>
-                                <?php endif ?>
-                            <?php endif ?>>
-                            <?= $platform['name'] ?>
-                        </option>
-                    <?php endforeach ?>
-                </select>
-            </li>
-            <li id="platform4">
-                
-                <select name="platform4" onchange="checkSelect(this)">
-                    <option value="0">--Choisissez une plateforme--</option>
-                    <?php foreach ($platforms as $platform):?>
-                        <option id="<?= intval($platform['id']) ?>" value="<?= intval($platform['id']) ?>"
-                            <?php if (array_key_exists(3, $toEditGamePlatforms)): ?>
-                                <?php if($platform['id'] == $toEditGamePlatforms[3]['id']): ?>
-                                    <?php echo "selected" ?>
-                                <?php endif ?>
-                            <?php endif ?>>
-                            <?= $platform['name'] ?>
-                        </option>
-                    <?php endforeach ?>
-                </select>
-            </li>
-            <li id="platform5">
-                           
-                <select name="platform5" onchange="checkSelect(this)">
-                    <option value="0">--Choisissez une plateforme--</option>
-                    <?php foreach ($platforms as $platform):?>
-                        <option id="<?= intval($platform['id']) ?>" value="<?= intval($platform['id']) ?>"
-                            <?php if (array_key_exists(4, $toEditGamePlatforms)): ?>
-                                <?php if($platform['id'] == $toEditGamePlatforms[4]['id']): ?>
-                                    <?php echo "selected" ?>
-                                <?php endif ?>
-                            <?php endif ?>>
-                            <?= $platform['name'] ?>
-                        </option>
-                    <?php endforeach ?>
-                </select>
-            </li>
-            <li id="platform6">
-                
-                <select name="platform6" onchange="checkSelect(this)">
-                    <option value="0">--Choisissez une plateforme--</option>
-                    <?php foreach ($platforms as $platform):?>
-                        <option id="<?= intval($platform['id']) ?>" value="<?= intval($platform['id']) ?>"
-                            <?php if (array_key_exists(5, $toEditGamePlatforms)): ?>
-                                <?php if($platform['id'] == $toEditGamePlatforms[5]['id']): ?>
-                                    <?php echo "selected" ?>
-                                <?php endif ?>
-                            <?php endif ?>>
-                            <?= $platform['name'] ?>
-                        </option>
-                    <?php endforeach ?>
-                </select>
-            </li>
+                        <?php foreach ($platforms as $platform):?>
+                            <option id="<?= intval($platform['id']) ?>" value="<?= intval($platform['id']) ?>"
+                                <?php if (array_key_exists($gamePlatformCount, $toEditGamePlatforms)): ?>
+                                    <?php if($platform['id'] == $toEditGamePlatforms[$gamePlatformCount]['id']): ?>
+                                        <?php echo "selected" ?>
+                                    <?php endif ?>
+                                <?php endif ?>>
+                                <?= $platform['name'] ?>
+                            </option>
+                        <?php endforeach ?>
+                    </select>
+                </li>
+                <?php $gamePlatformCount++ ?>
+            <?php endfor?> 
+
             <?php $genres = $editController->getGenres() ?>
-            <li >
-                <label for="genre1">Genres:</label>
-                <select name="genre1">
-                    <option value="0">--Choisissez un genre--</option>
-                    <?php foreach ($genres as $genre):?>
-                        <option id="<?= intval($genre['id']) ?>" value="<?= intval($genre['id']) ?>"
-                        <?php if (array_key_exists(0 , $toEditGameGenres)): ?>
-                            <?php if($genre['id'] == $toEditGameGenres[0]['id']): ?>
-                                <?php echo "selected" ?>
-                            <?php endif ?>
-                        <?php endif ?>>
-                        <?= $genre['name'] ?></option>
-                    <?php endforeach ?>
-                </select>
-            </li>
-            <li id="genre2">
-                <select name="genre2">
-                <option value="0">--Choisissez un genre--</option>
-                    <?php foreach ($genres as $genre):?>
-                        <option id="<?= intval($genre['id']) ?>" value="<?= intval($genre['id']) ?>"
-                        <?php if (array_key_exists(1 , $toEditGameGenres)): ?>
-                            <?php if($genre['id'] == $toEditGameGenres[1]['id']): ?>
-                                <?php echo "selected" ?>
+            <label for="genre1">Genres:</label>
+            <?php $gameGenreCount = 0 ?>
+            <?php for ($j=1; $j <= 3; $j++): ?> 
+                <li >
+                    <select name="genre<?= $j ?>">
+                        <option value="0">--Choisissez un genre--</option>
+                        <?php foreach ($genres as $genre):?>
+                            <option id="<?= intval($genre['id']) ?>" value="<?= intval($genre['id']) ?>"
+                            <?php if (array_key_exists($gameGenreCount , $toEditGameGenres)): ?>
+                                <?php if($genre['id'] == $toEditGameGenres[$gameGenreCount]['id']): ?>
+                                    <?php echo "selected" ?>
                                 <?php endif ?>
-                        <?php endif ?>>
-                        <?= $genre['name'] ?></option>
-                    <?php endforeach ?>
-                </select>
-            </li>
-            <li id="genre3">
-                <select name="genre3">
-                <option value="0">--Choisissez un genre--</option>
-                    <?php foreach ($genres as $genre):?>
-                        <option id="<?= intval($genre['id']) ?>" value="<?= intval($genre['id']) ?>"
-                        <?php if (array_key_exists(2 , $toEditGameGenres)): ?>
-                            <?php if($genre['id'] == $toEditGameGenres[2]['id']): ?>
-                                <?php echo "selected" ?>
-                                <?php endif ?>
-                        <?php endif ?>>
-                        <?= $genre['name'] ?></option>
-                    <?php endforeach ?>
-                </select>
-            </li>
+                            <?php endif ?>>
+                            <?= $genre['name'] ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </li>
+                <?php $gameGenreCount++ ?>
+            <?php endfor?> 
             <li>
                 <label for='description'>Description:</label>
                 <textarea name='description' cols="20" rows="15"><?= $toEditGame['description'] ?></textarea>
