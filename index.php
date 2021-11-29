@@ -17,9 +17,6 @@ if (isset($_GET['p'])) {
 
 $title = null;
 
-if (!$title) {
-    
-}
 
 /*Contrôle et direction vers une page ou une action spécifiée*/
 switch ($p) {

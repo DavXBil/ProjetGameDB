@@ -3,29 +3,38 @@
 
 import * as util from './classes/utilities.js'*/
 
-/*let addForm = document.getElementById("addproduct")
-let addBtn = document.getElementById("addbtn")*/
 
-//Bouton d'enregistrement d'utilisateur
-const regBtn = document.getElementById('regbtn')
-//Bouton reininitialisation de formulaire
-const resetBtn = document.getElementById("resetbtn")
-//Bouton d'ajout de jeu
-const addBtn = document.getElementById("addBtn")
-//Message d'erreur de champs mail
-const errorMail = document.querySelector(".errormail")
-//Message d'erreur de champs de mot de passe
-const errorPswrd = document.querySelector(".errorpswrd")
-//Bouton d'ajout de champs de genre
-const addGenreFieldBtn = document.getElementById("addgenre")
-//Bouton de retrait de champs de genre
-const removeGenreFieldBtn = document.getElementById("removegenre")
-//Bouton d'ajout de champs de platforme
-const addPlatformFieldBtn = document.getElementById("addplatform")
-//Bouton de retrait de champs de plateforme
-const removePlatformFieldBtn = document.getElementById("removeplatform")
 //Bouton d'affichage d'évalutaion complète
 const readMoreReviewLinks = document.querySelectorAll(".readmore")
+
+//Message d'erreur de champs mail
+const errorMail = document.querySelector(".error-mail")
+//Message d'erreur de champs de mot de passe
+const errorPassword = document.querySelector(".error-password")
+//Formulaire d'authentification 
+const loginForm = document.querySelector(".login")
+//Barre de recherche
+const searchBar = document.querySelector(".search")
+
+//Bouton d'affichage du formulaire d'authentification
+const LoginButton = document.getElementById("login-icon")
+//Bouton d'affichage de la barre de recherche
+const SearchButton = document.getElementById("search-icon")
+
+const registerButton = document.getElementById('regbtn')
+//Bouton reininitialisation de formulaire
+const resetButton = document.getElementById("reset-button")
+//Bouton d'ajout de jeu
+const addButton = document.getElementById("add-button")
+//Bouton d'ajout de champs de genre
+const addGenreFieldButton = document.getElementById("addgenre")
+//Bouton de retrait de champs de genre
+const removeGenreFieldButton = document.getElementById("removegenre")
+//Bouton d'ajout de champs de platforme
+const addPlatformFieldButton = document.getElementById("addplatform")
+//Bouton de retrait de champs de plateforme
+const removePlatformFieldButton = document.getElementById("removeplatform")
+
 
 let genreNb = 1
 let platformNb = 1
@@ -35,12 +44,33 @@ let platformNb = 1
 // FONCTIONS                                                                           //
 /////////////////////////////////////////////////////////////////////////////////////////
 
+
+function toggleMobileLogin() {
+
+    loginForm.classList.toggle("hidden")
+
+    if (!searchBar.classList.contains("hidden")) {
+        searchBar.classList.add("hidden")
+    }
+
+}
+
+function toggleMobileSearchBar() {
+
+    searchBar.classList.toggle("hidden")
+
+    if (!loginForm.classList.contains("hidden")) {
+        loginForm.classList.add("hidden")
+    }
+
+}
+
 //Activation/Désactivation des bouton submit
 function toggleSubmit(value) {
-    if (addBtn !== null) {
-        addBtn.disabled = value
-    } else if (regBtn !== null) {
-        regBtn.disabled = value
+    if (addButton !== null) {
+        addButton.disabled = value
+    } else if (registerButton !== null) {
+        registerButton.disabled = value
     }
 }
 
@@ -79,12 +109,12 @@ function checkPassword(field) {
     if (field.value.length < 7) {
         //Si non, erreur
         field.classList.add('error')
-        errorPswrd.classList.remove('hidden')
+        errorPassword.classList.remove('hidden')
         toggleSubmit(true) 
     } else {
         //Si oui, on retire l'erreur
         field.classList.remove('error')
-        errorPswrd.classList.add('hidden')
+        errorPassword.classList.add('hidden')
         toggleSubmit(false) 
     }
     return field.value
@@ -95,12 +125,12 @@ function confirmPswrd(field, password) {
     //Non? erreur
     if (field.value !== password.value) {
         field.classList.add('error')
-        errorPswrd.classList.remove('hidden') 
+        errorPassword.classList.remove('hidden') 
         toggleSubmit(true)        
     } else {
     //Oui? on retire l'erreur
         field.classList.remove('error')
-        errorPswrd.classList.add('hidden')
+        errorPassword.classList.add('hidden')
         toggleSubmit(false) 
     }
 }
@@ -131,11 +161,11 @@ function addGenreSelect() {
     }
     if (genreNb >= 2 ) {
         //Activation du bouton de retrait de champ
-        removeGenreFieldBtn.classList.remove('disabled')
+        removeGenreFieldButton.classList.remove('disabled')
     }
     if (genreNb == 3) {
         //Désactivation du bouton d'ajout de champ
-        addGenreFieldBtn.classList.add('disabled')
+        addGenreFieldButton.classList.add('disabled')
     }
 }
 // Fonction de retrait de champs select de genre du formulaire d'ajout de jeu
@@ -149,11 +179,11 @@ function removeGenreSelect() {
     }
     if (genreNb < 2 ) {
         //Désactivation du bouton de retrait de champ
-        removeGenreFieldBtn.classList.add('disabled')
+        removeGenreFieldButton.classList.add('disabled')
     }
     if (genreNb < 3) {
         //Activation du bouton d'ajout de champ
-        addGenreFieldBtn.classList.remove('disabled')
+        addGenreFieldButton.classList.remove('disabled')
     }
 }
 
@@ -166,11 +196,11 @@ function addPlatformSelect() {
     }
     if (platformNb >= 2 ) {
         //Activation du bouton de retrait de champ
-       removePlatformFieldBtn.classList.remove('disabled')
+       removePlatformFieldButton.classList.remove('disabled')
     }
     if (platformNb == 6) {
         //Désactivation du bouton d'ajout de champ
-        addPlatformFieldBtn.classList.add('disabled')
+        addPlatformFieldButton.classList.add('disabled')
     }
 }
 
@@ -185,11 +215,11 @@ function removePlatformSelect() {
     }
     if (platformNb < 2 ) {
         //Désactivation du bouton de retrait de champ
-       removePlatformFieldBtn.classList.add('disabled')
+       removePlatformFieldButton.classList.add('disabled')
     }
     if (platformNb < 6) {
         //Activation du bouton d'ajout de champ
-       addPlatformFieldBtn.classList.remove('disabled')
+       addPlatformFieldButton.classList.remove('disabled')
     }
 }
 
@@ -228,27 +258,31 @@ function resetPreview() {
 /////////////////////////////////////////////////////////////////////////////////////////
 
 
+LoginButton.addEventListener("click", toggleMobileLogin)
+
+SearchButton.addEventListener("click", toggleMobileSearchBar)
+
 if (readMoreReviewLinks) {
     for (let i = 0; i < readMoreReviewLinks.length; i++) {
     readMoreReviewLinks[i].addEventListener('click', readMoreReview)
     }
 }
 
-if (addGenreFieldBtn) {
-    addGenreFieldBtn.addEventListener('click', addGenreSelect)
+if (addGenreFieldButton) {
+    addGenreFieldButton.addEventListener('click', addGenreSelect)
 }
 
-if (removeGenreFieldBtn) {
-    removeGenreFieldBtn.addEventListener('click', removeGenreSelect)}
+if (removeGenreFieldButton) {
+    removeGenreFieldButton.addEventListener('click', removeGenreSelect)}
 
-if (addPlatformFieldBtn) {
-    addPlatformFieldBtn.addEventListener('click', addPlatformSelect)
+if (addPlatformFieldButton) {
+    addPlatformFieldButton.addEventListener('click', addPlatformSelect)
 }
 
-if (removePlatformFieldBtn) {
-    removePlatformFieldBtn.addEventListener('click', removePlatformSelect)
+if (removePlatformFieldButton) {
+    removePlatformFieldButton.addEventListener('click', removePlatformSelect)
 }
 
-if (resetBtn) {
-   resetBtn.addEventListener("click", resetPreview)  
+if (resetButton) {
+   resetButton.addEventListener("click", resetPreview)  
 }

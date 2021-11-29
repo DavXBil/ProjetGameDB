@@ -6,7 +6,7 @@ require ''.ROOT.'/app/classes/UserSession.php';
 class LoginController {
 
 	/*Méthode d'authentification */
-    public function getSession() {
+    	public function getSession() {
 
 			$userModel = new UserModel();
 			$error = "<div class= errormsg id=loginmsg>L'identifiant ou le mot de passe est incorrect</div>";

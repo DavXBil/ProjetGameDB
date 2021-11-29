@@ -17,28 +17,39 @@
         <?php $isAuthenticated = $session->checkAuthentication() ?>
         <header>
             <h1><i class="fas fa-gamepad"></i>archives du jeux-video</h1>
-            <nav>
-                <a href="index.php?p=home">Accueil</a>
-                <a href="index.php?p=all">Tous les jeux</a>
-                <?php if (!$isAuthenticated): ?>
-                    <a href="index.php?p=register">S'enregistrer</a>
-                <?php elseif ($session->isAdmin()): ?>
-                    <a href="index.php?p=add">Ajouter un jeu</a>
-                    <a href="index.php?p=admin">Gestion</a>
-                <?php else: ?>
-                    <a href="index.php?p=add">Ajouter un jeu</a>
-                <?php endif?>
-            </nav>
+                <nav id= "menu-content">
+                    <a href="index.php?p=home">Accueil</a>
+                    <a href="index.php?p=all">Jeux</a>
+                    <?php if (!$isAuthenticated): ?>
+                        <a href="index.php?p=register">S'enregistrer</a>
+                    <?php elseif ($session->isAdmin()): ?>
+                        <a href="index.php?p=add">Ajouter un jeu</a>
+                        <a href="index.php?p=admin">Gestion</a>
+                    <?php else: ?>
+                        <a href="index.php?p=add">Ajouter un jeu</a>
+                    <?php endif?>
+                </nav>
         </header>
         <main>
             <section class="forms">
+
+                <div id="forms-icons-wrapper">
+                    <div>
+                        <i id="login-icon" class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <i id="search-icon" class="fas fa-search"></i>
+                    </div>
+                </div>
+
                 <!-- si les identifiant et mdp son envoyé on crée la session -->
                 <?php if (isset($_POST['login']) && isset($_POST['loginpswrd'])): ?>
                     <?php $session->getSession() ?>
                 <?php endif ?>
+
                 <!-- si l'utilisateur n'est pas authentifié on affiche le formulaire de connexion-->
                 <?php if (!$isAuthenticated): ?>
-                    <form action="" name="loginform" class="loginform" method="POST">
+                    <form action="" name="loginform" class="login loginform hidden" method="POST">
                         <label for="login">Login:</label>
                         <input type="text" name="login">
                         <label for="loginpswrd">Mot-de-passe:</label>
@@ -46,7 +57,7 @@
                         <button type="submit">Connexion</button>
                     </form>
                 <?php else:?>  
-                    <div id="usernfo">
+                    <div id="usernfo" class="login hidden">
                         <div>
                             <img src="public/img/users/<?= $session->showUserImage() ?>">
                         </div>
@@ -56,8 +67,9 @@
                             <a href="index.php?p=deco">Deconnexion</a>
                         </div>
                     </div>
-                <?php endif?>       
-                <form action='index.php?p=all' class="search" method='POST'>
+                <?php endif?>     
+
+                <form action='index.php?p=all' class="search hidden" method='POST'>
                     <label for="search">Rechercher un jeu:</label>
                     <input type="text" name="search">
                     <button type="submit">Recherche</button>

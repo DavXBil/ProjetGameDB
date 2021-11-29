@@ -33,6 +33,7 @@ main {
     background: linear-gradient(rgba(75, 75, 75, 0.9), rgba(59, 59, 59, 0.9) );
     padding-bottom: 20px;
     margin-right: -10px;
+    text-align: center;
 }
 
 main h2 {
@@ -79,7 +80,6 @@ button:hover {
 button:active {
    background-color: rgb(255, 72, 0);
    transition: none;
-
 }
 
 .moreinput, .lessinput {
@@ -157,21 +157,40 @@ table {
    background-color: rgba(59, 59, 59, 1)
 }
 
-.forms {
-
-    background: linear-gradient( rgba(59, 59, 59, 1), rgba(75, 75, 75, 0.2));
-}
-
 #filter, #adminlist {
     background: linear-gradient(rgba(75, 75, 75, 0.2), rgba(75, 75, 75, 0.1));
 }
+
 
 .forms {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 20px 0;
-    margin-bottom: 50px;    
+    margin-bottom: 50px;
+    height: 200px;
+    background: linear-gradient( rgb(26, 26, 26), rgba(75, 75, 75, 0.2));
+}
+
+
+#forms-icons-wrapper {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+#forms-icons-wrapper .fas {
+    font-size: 3rem;
+    color: rgb(75, 194, 224);
+    transition: all 0.5s ease;
+}
+
+#forms-icons-wrapper .fas:hover {
+    cursor: pointer;
+    color: rgb(255, 72, 0);
+    transition: all 0.5s ease;
+
 }
 
 .forms #usernfo {
@@ -196,7 +215,7 @@ table {
     background-color: #fba;
 }
 
-.errormsg {
+.error-message {
     color: #fba;
 }
 
@@ -204,12 +223,12 @@ table {
     display:none;
 }
 
-#regbtn[disabled], #addBtn[disabled] {
+#regbtn[disabled], #add-button[disabled] {
     color: rgb(104, 104, 104);
     border-color: rgb(104, 104, 104);
 }
 
-#regbtn[disabled]:hover, #addBtn[disabled]:hover {
+#regbtn[disabled]:hover, #add-button[disabled]:hover {
     cursor: default;
     background-color: rgb(59, 59, 59);
     color: rgb(104, 104, 104);
@@ -302,12 +321,10 @@ td:nth-child(2) {
 
 .popular img {
     width: 70%;
-    height: 160px;
 }
 
 .popular td:nth-child(2) {
     padding: 20px 20px;
-    font-size: 2.2rem;
 }
 
 .popular .gamename {
@@ -333,10 +350,6 @@ td:nth-child(2) {
     padding: 0;
 }
 
-.recent img, .popular img {
-    width: 50%;
-}
-
 .recents {
     font-size: 2rem;
     margin-top: 20px;
@@ -353,7 +366,6 @@ td:nth-child(2) {
 
 .paging {
     font-size: 2.5rem; 
-    width: 30%;
     margin: auto;
     padding: 0 0 30px;
     text-align: center;
@@ -585,7 +597,6 @@ td:nth-child(2) {
 
 #admintable{
     padding: 20px 0;
-    width: 90%;
     margin: auto;
 }
 
@@ -682,6 +693,7 @@ td:nth-child(2) {
 .letterfilter a {
     padding: 0;
 }
+
 
 #allgametable {
     margin: 0 auto 50px;
@@ -789,10 +801,6 @@ footer nav {
         width: 40%;
     }
 
-    .forms #usernfo {
-        text-align: left;
-    }
-
     .popular {
         flex-basis: 50%;
     }
@@ -859,6 +867,10 @@ footer nav {
 
     #loginmsg {
         flex-basis: 80%;
+    }
+
+    .forms {
+        margin: auto;
     }
     
     .forms .loginform input {
@@ -946,7 +958,6 @@ footer nav {
 
     .addgame {
         align-self: flex-start;
-        margin-left: 15%;
     }
 
     #adddev {

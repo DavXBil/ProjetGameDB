@@ -16,17 +16,17 @@
         </li>   
         <li>
             <label for="mail">Addresse e-mail:</label>
-            <p class="hidden errormsg errormail">Cette addresse e-mail est invalide</p>
+            <p class="hidden error-message error-mail">Cette addresse e-mail est invalide</p>
             <input type="text" name="mail" id="mail" onblur="checkForm(this)">
         </li>    
         <li>
             <label for="password">Mot-de-Passe:</label>
-            <p class="hidden errormsg errorpswrd">Le mot de passe est trop court</p>
+            <p class="hidden error-message error-password">Le mot de passe est trop court</p>
             <input type="password" name="password" id="password" onblur="checkForm(this)">
         </li>
         <li>
             <label for="pswrdconfirm">Confirmation du Mot-de-Passe:</label>
-            <p class="hidden errormsg errorpswrd">Les mots de passe ne sont pas identiques</p>
+            <p class="hidden error-message error-password">Les mots de passe ne sont pas identiques</p>
             <input type="password" name="pswrdconfirm" id="pswrdconfirm" onblur="checkForm(this)">
         </li> 
         <li>
@@ -35,7 +35,7 @@
             <input type="file" name="userimage" id="userimage" accept="image/*" onchange="imagePreview(event)">
         </li>  
         <button type="submit" id="regbtn">Enregistrer</button>
-        <button type="reset" id="resetbtn">Annuler</button> 
+        <button type="reset" id="reset-button">Annuler</button> 
     </ul>  
     </form>
 </section> 

@@ -11,7 +11,7 @@ Informations de connexion utilisateurs: (Sensible à la casse)
 
 Admin:
 pseudo: Brain
-mot-de-passe: feri626468
+mot-de-passe: Feri626468
 
 
 Utilisateur lambda:
@@ -21,7 +21,4 @@ mot-de-passe: pikapi1234
 
 pseudo: Blob
 mot-de-passe: bleh2428
-
-
-
 
