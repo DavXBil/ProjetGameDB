@@ -29,6 +29,16 @@ header, footer{
     text-align: center;
 }
 
+a, #forms-icons-wrapper {
+    color: rgb(255, 255, 255);
+}
+
+a:hover, #forms-icons-wrapper .fas:hover{
+    color: rgb(75, 194, 224);
+    transition: all 0.5s ease;
+}
+
+
 main {
     background: linear-gradient(rgba(75, 75, 75, 0.9), rgba(59, 59, 59, 0.9) );
     padding-bottom: 20px;
@@ -41,17 +51,13 @@ main h2 {
 }
 
 a {
-    color: rgb(75, 194, 224);
+    
     font-family: 'Titillium Web', Arial, sans-serif;
     transition: all 0.5s ease;
     padding: 10px 0;
     text-decoration: none;
 }
 
-a:hover {
-    color: rgb(255, 72, 0);
-    transition: all 0.5s ease;
-}
 
 img {
     max-width: 100%;
@@ -123,6 +129,7 @@ h1, h2, h3, h4, caption, .gamename {
 
 header h1 {
     font-size: 3.5rem;
+    padding-bottom: 30px;
 }
 
 header h1 .fa-gamepad {
@@ -140,11 +147,12 @@ header nav a {
     font-size: 2.5rem;
     font-weight: bold;
     flex-basis: 35%;
+    padding: 15px 0;
 }
 
 header nav a:hover {
+    background-color: rgba(231, 117, 17, 0.342);
     transition: all 0.5s ease;
-    background-color: rgb(52, 115, 131);
 }
 
 /*--------------------------------------------------------MAIN------------------------------------------------------------*/
@@ -182,14 +190,7 @@ table {
 
 #forms-icons-wrapper .fas {
     font-size: 3rem;
-    color: rgb(75, 194, 224);
     transition: all 0.5s ease;
-}
-
-#forms-icons-wrapper .fas:hover {
-    color: rgb(255, 72, 0);
-    transition: all 0.5s ease;
-
 }
 
 .forms #usernfo {
@@ -277,6 +278,7 @@ table caption, th {
     color: black;
     background-color: rgb(243, 131, 32);
     border-radius:  30px 30px 0 0;
+    border-bottom: 1px solid black;
 }
 
 table td, table th {
@@ -375,7 +377,7 @@ td:nth-child(2) {
  }
  
  .currentpage {
-    text-decoration: underline;
+    text-decoration: underline 3px;
     text-decoration-color: rgb(190, 100, 58); 
  }
 
@@ -588,6 +590,10 @@ td:nth-child(2) {
     margin: 20px 0;
     padding: 0;
     list-style-type: disc;
+}
+
+#adminlist a:hover, .paging a:hover {
+    text-decoration: underline 3px ;
 }
 
 .confirmmsg {
