@@ -3,6 +3,7 @@
 class EditUserController {
 
     private object $user;
+    private object $session;
 
     public function __construct() {
 

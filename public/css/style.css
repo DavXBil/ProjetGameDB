@@ -187,7 +187,6 @@ table {
 }
 
 #forms-icons-wrapper .fas:hover {
-    cursor: pointer;
     color: rgb(255, 72, 0);
     transition: all 0.5s ease;
 

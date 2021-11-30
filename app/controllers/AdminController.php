@@ -6,13 +6,11 @@ require ''.ROOT.'/app/models/GameModel.php';
 class AdminController {
 
   private object $game;
-  private object $user;
   private int $limit = 20;
 
   public function __construct() {
 
       $this->game = new GameModel();
-      $this->user = new UserModel();
   }
 
   /*Méthode d'affichage de tableau des jeux*/

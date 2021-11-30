@@ -17,7 +17,8 @@ class Database {
 				$this->pass,
 					[
 						PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-						PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+						PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+						PDO::ATTR_PERSISTENT => true
 					]);
 		} catch(PDOException $e) {
 			echo 'Une Erreur est survenue : '.$e->getMessage();
@@ -43,20 +44,20 @@ class Database {
 		return $this->pdo->lastInsertId();
 	}
 	/*Execution de requête de récuperation d'éléments BDD*/
-    public function query($sql, array $criteria = array()) {
+	public function query($sql, array $criteria = array()) {
 
-        $query = $this->pdo->prepare($sql);
+		$query = $this->pdo->prepare($sql);
+			$query->execute($criteria);
+
+		return $query->fetchAll(PDO::FETCH_ASSOC);
+	}
+	/*Execution de requête de récuperation d'un élément BDD*/
+	public function queryOne($sql, array $criteria = array()) {
+			
+		$query = $this->pdo->prepare($sql);
+
 		$query->execute($criteria);
 
-        return $query->fetchAll(PDO::FETCH_ASSOC);
-    }
-	/*Execution de requête de récuperation d'un élément BDD*/
-    public function queryOne($sql, array $criteria = array()) {
-		
-        $query = $this->pdo->prepare($sql);
-
-        $query->execute($criteria);
-
-        return $query->fetch(PDO::FETCH_ASSOC);
-    }
+		return $query->fetch(PDO::FETCH_ASSOC);
+	}
 }
