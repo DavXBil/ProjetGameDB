@@ -31,7 +31,7 @@ class RegisterController {
                 // Si oui: message
                 echo "<div class='addmsg'>Ce Pseudo existe déjà.</div>";
             }
-        }  
+        }
     }
 }
 

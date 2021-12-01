@@ -11,6 +11,8 @@ const readMoreReviewLinks = document.querySelectorAll(".readmore")
 const errorMail = document.querySelector(".error-mail")
 //Message d'erreur de champs de mot de passe
 const errorPassword = document.querySelector(".error-password")
+//Message d'erreur de champs de confirmation de mot de passe
+const errorPasswordConfirm = document.querySelector(".error-password-confirm")
 //Formulaire d'authentification 
 const loginForm = document.querySelector(".login")
 //Barre de recherche
@@ -45,7 +47,7 @@ let platformNb = 1
 /////////////////////////////////////////////////////////////////////////////////////////
 
 
-function toggleMobileLogin() {
+function toggleLogin() {
 
     loginForm.classList.toggle("hidden")
 
@@ -55,7 +57,7 @@ function toggleMobileLogin() {
 
 }
 
-function toggleMobileSearchBar() {
+function toggleSearchBar() {
 
     searchBar.classList.toggle("hidden")
 
@@ -125,12 +127,12 @@ function confirmPswrd(field, password) {
     //Non? erreur
     if (field.value !== password.value) {
         field.classList.add('error')
-        errorPassword.classList.remove('hidden') 
+        errorPasswordConfirm.classList.remove('hidden') 
         toggleSubmit(true)        
     } else {
     //Oui? on retire l'erreur
         field.classList.remove('error')
-        errorPassword.classList.add('hidden')
+        errorPasswordConfirm.classList.add('hidden')
         toggleSubmit(false) 
     }
 }
@@ -258,9 +260,9 @@ function resetPreview() {
 /////////////////////////////////////////////////////////////////////////////////////////
 
 
-LoginButton.addEventListener("click", toggleMobileLogin)
+LoginButton.addEventListener("click", toggleLogin)
 
-SearchButton.addEventListener("click", toggleMobileSearchBar)
+SearchButton.addEventListener("click", toggleSearchBar)
 
 if (readMoreReviewLinks) {
     for (let i = 0; i < readMoreReviewLinks.length; i++) {

@@ -20,6 +20,7 @@ body {
     background-size: cover;
     background-attachment: fixed;
     font-size: 1.9rem;
+    overflow-x: hidden;
 }
 
 header, footer{
@@ -532,7 +533,7 @@ td:nth-child(2) {
     margin: 0 25px 25px 0;
 }
 
-.addmsg {
+.addmsg, .editmsg {
     text-align: center;
     font-size: 3rem;
     color: rgb(247, 56, 49);

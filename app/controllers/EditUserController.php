@@ -1,24 +1,35 @@
 <?php
 
+use phpDocumentor\Reflection\PseudoTypes\True_;
+
 class EditUserController {
 
     private object $user;
     private object $session;
+    private $error; 
 
     public function __construct() {
 
         $this->user = new UserModel();
         $this->session = new UserSession();
+        $this->error = false;
+
     }
     /*Récupération des infos de l'utilisateur*/
-    public function getUser() {
+    public function getUserInfos() {
 
         return $this->user->find($_SESSION['user']['name']);
     }
+    
+    public function getUser($newUsername) {
+
+        return $this->user->find($newUsername);
+    }
+
     /*Edition des infos d'utilisateur*/
     public function editUser() {
         /*Appel de méthode de récupération*/
-        $userNfo = $this->getUser();
+        $userNfo = $this->getUserInfos();
         
         /*Infos du formulaire*/
         $formNfos = $_POST;
@@ -28,8 +39,18 @@ class EditUserController {
 
         /*Si le champ Pseudo est rempli et different du pseudo initial*/
         if ((!empty($formNfos['username'])) && ($formNfos['username'] != $userNfo['username'])) {
-            /*Ajout du nouveau Pseudo au tableau des nouvelle infos à enregistrer*/
-            $newUserNfo['username'] =  $formNfos['username'];
+            /*Le nouveau pseudo est-t'il déjà pris*/
+                $formName = $this->getUser($formNfos['username']);
+                /*Si Oui message d'erreur*/
+                    if (is_array($formName)) {
+                        echo "<div class='editmsg'>Ce Pseudo existe déjà.</div>";
+                        $this->error = True;
+                        $newUserNfo['username'] = $userNfo['username'];
+                    } else {
+                        /*Ajout du nouveau Pseudo au tableau des nouvelle infos à enregistrer*/
+                        $newUserNfo['username'] =  $formNfos['username'];
+                    }
+
         } else {
             $newUserNfo['username'] = $userNfo['username'];
         }
@@ -69,8 +90,10 @@ class EditUserController {
         $this->user->editUser($userNfo['id'], $newUserNfo['username'], $newUserNfo['mail'], $newUserNfo['password'], $newUserNfo['image']);
         //Edition des informations de session
         $this->session->editSession($newUserNfo['username'], $newUserNfo['mail'], $newUserNfo['image']);
+        if (!$this->error) {
+            echo "<div class='editmsg'>Modifications enregistrées avec succès</div>";
+        }
         
-        header('Location: index.php');
     }
 }
 

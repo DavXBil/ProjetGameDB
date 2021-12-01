@@ -5,9 +5,10 @@
 
 <?php $editUserController = new EditUserController() ?>
 <!-- Récupération des utilisateurs -->
-<?php $toEditUser = $editUserController->getUser() ?>
+<?php $toEditUser = $editUserController->getUserInfos() ?>
 <!-- Si le formulaire d'edition a été envoyé on lance la méthode d'édition -->
 <?php if (!empty($_POST)): ?>
+
     <?php $editUserController->editUser() ?>
 <?php endif ?>
 
