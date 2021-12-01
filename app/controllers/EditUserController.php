@@ -64,9 +64,17 @@ class EditUserController {
         }  
 
         /*Pour le champ de mot de passe*/
-        if ((!empty($formNfos['password'])) && ($formNfos['password'] != $userNfo['password']) && (password_verify($formNfos['oldpassword'], $userNfo['password']))) {
-            /*cryptage du mot-de-passe*/
-            $newUserNfo['password'] = password_hash($formNfos['password'], PASSWORD_DEFAULT);
+        if (!empty($formNfos['password'])) {
+            /*est-ce que l'ancien mot de passe est correct*/
+            if (password_verify($formNfos['oldpassword'], $userNfo['password']) && ($formNfos['password'] === $userNfo['password'])) {
+                /*cryptage du mot-de-passe*/
+                $newUserNfo['password'] = password_hash($formNfos['password'], PASSWORD_DEFAULT);
+            } else {
+                echo "<div class='editmsg'>Erreur pendant la modification du mot de passe, un champ est érroné</div>";
+                $this->error = True;
+                $newUserNfo['password'] = $userNfo['password'];
+            }
+
         } else {
             $newUserNfo['password'] = $userNfo['password'];
         }

@@ -144,10 +144,12 @@ function checkForm(field) {
     //Si c'est le champ du mail, on appelle la fonction adéquate
     if (field.id === "mail") {
         checkMail(field)
-    }// IDEM pour le mdp 
+    }
+    // IDEM pour le mdp 
     if (field.id === "password") {
         checkPassword(field)
-    }// IDEM pour la confirmation du mdp
+    }
+    // IDEM pour la confirmation du mdp
     if (field.id === "pswrdconfirm") {
         let password = document.getElementById('password')
         confirmPswrd(field, password)

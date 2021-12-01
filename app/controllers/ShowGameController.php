@@ -52,7 +52,7 @@ class ShowGameController extends GameController {
         $gameId = $_GET['id'];
         $userId = $_SESSION['user']['id'];
         //Le formulaire est-il rempli?
-        if(isset($_POST['note']) && !empty($_POST['comment'])) {
+        if(isset($_POST['note']) && $_POST['note'] != "#" && !empty($_POST['comment'])) {
             //Récupération des reviews du jeu
             $checkReview = $this->game->findReviews($gameId);
 
